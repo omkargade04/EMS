@@ -4,7 +4,9 @@ import axios from 'axios';
 dotenv.config({ path: "./config.env" });
 const cors = require('cors');
 const cron = require('node-cron')
-const userRoutes = require('../router/user.routes');
+const studentRoutes = require('../router/student.routes');
+const educatorRoutes = require('../router/educator.routes');
+const courseRoutes = require('../router/course.routes');
 const adminRoutes = require('../router/admin.routes');
 
 const app: Application = express();
@@ -12,7 +14,9 @@ app.use(express.json())
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/v1/user', userRoutes);
+app.use('/v1/student', studentRoutes);
+app.use('/v1/educator', educatorRoutes)
+app.use("/v1/course", courseRoutes);
 app.use('/v1/admin', adminRoutes);
 
 const port = process.env.PORT;
