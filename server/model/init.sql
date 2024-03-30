@@ -22,7 +22,7 @@ create table students(
     password varchar(255) unique not null,
     applied_courses varchar(255)[] default array[]::varchar(255)[],
     created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
 );
 
 create table student_token(
@@ -39,7 +39,7 @@ create table educators(
     email varchar(255) unique not null,
     password varchar(255) unique not null,
     created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
 );
 
 create table educator_token(
@@ -48,6 +48,15 @@ create table educator_token(
     fk_educator int not null,
     created_at timestamp default current_timestamp,
     constraint fk_educator foreign key(fk_educator) references educators(educator_id) on delete cascade on update cascade
+);
+
+create table educator_verification(
+    verification_id serial primary key,
+    name varchar(255) not null,
+    email varchar(255) unique not null,
+    password varchar(255) unique not null,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
 );
 
 create table courses(

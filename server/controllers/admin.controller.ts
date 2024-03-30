@@ -99,5 +99,42 @@ const signin = async (req: ReqMid, res: Response) => {
   }
 };
 
+const eductorVrificatonInfo = async(req: any, res: any) => {
+  try{
+    const getQuery: string = `SELECT * FROM educator_verification`;
+    const getData: QueryResult<any> = await client.query(getQuery);
+    console.log(getData.rows);
+    res.status(200).json({status: true, data: getData.rows, message: "Fetched educators info"});
+  }catch(err: any){
+    console.log("This is error: ", err);
+    res.status(400).json({ status: false, message: err.message });
+  }
+}
 
-module.exports = { signup, signin };
+const verifyingEducator = async(req: any, res: any) => {
+  const educator_id = req.params.id;
+  if(!educator_id){
+    return res.status(400).json({status: false, message: "No educator with this id exists"});
+  }
+  try{
+    const getEducatorQuery: string = `SELECT * FROM educator_verification WHERE verification_id = $1`;
+    const getEducatorParam: any[] = [educator_id];
+    const getEducatorData: QueryResult<any> = await client.query(getEducatorQuery, getEducatorParam);
+
+    const educator = getEducatorData.rows[0];
+    console.log("This is educator: ", educator);
+
+    const timestamp = new Date().toISOString();
+    const insertQuery: string = `INSERT INTO educators(name, email, password, created_at, updated_at) VALUES($1, $2, $3, $4, $5)`;
+    const insertParams: any[] = [educator.name, educator.email, educator.password, timestamp, timestamp];
+    const insertData: QueryResult<any> = await client.query(insertQuery, insertParams);
+
+    res
+    .status(200)
+    .json({ status: true, data: educator, message: "Educator verified successfully." });
+  }catch(err: any){
+
+  }
+}
+
+module.exports = { signup, signin, eductorVrificatonInfo, verifyingEducator };

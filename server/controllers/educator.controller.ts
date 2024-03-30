@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config({ path: "./config.env" });
 import { generateEducatorToken } from "../middlewares/user.middleware";
-import bcrypt from "bcryptjs";
+import bcrypt, { hash } from "bcryptjs";
 import { client } from "../model/db";
 import { ReqMid } from "../types/educator";
 import { QueryResult } from "pg";
@@ -139,6 +139,33 @@ const createCourse = async(req: ReqMid, res: any) => {
     }
 }
 
+const educatorVerification = async(req: any, res: any) => {
+  const {name, email, password} = req.body;
+  if (!name || !email || !password) {
+    console.log("Fill all details", req.body);
+    return res
+      .status(401)
+      .json({ status: false, message: "Fill all the fields" });
+  }
+
+  try{
+    const timestamp = new Date().toISOString();
+    const insertQuery: string = `INSERT INTO educator_verification(name, email, password, created_at, updated_at) VALUES($1, $2, $3, $4, $5)`;
+    const hashPassword = await bcrypt.hash(password, 10);
+    const insertParams: any[] = [name, email, hashPassword, timestamp, timestamp];
+    const insertData: QueryResult<any> = await client.query(insertQuery, insertParams);
+
+    console.log(insertData.rows[0]);
+
+    res
+    .status(200)
+    .json({ status: true, message: "Educator verification sent successfully." });
+  }catch(err: any){
+    console.log("This is error: ", err);
+    res.status(500).json({status: false, message: "Internal server error"});
+  }
+}
+
 const logout = async (req: ReqMid, res: Response) => {
   if (!req.token) {
     return res.status(401).json({ error: "You are already logged out" });
@@ -159,4 +186,4 @@ const logout = async (req: ReqMid, res: Response) => {
   }
 };
 
-module.exports = { signup, signin, createCourse, logout };
+module.exports = { signup, signin, createCourse, educatorVerification, logout };
