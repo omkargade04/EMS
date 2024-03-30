@@ -11,7 +11,13 @@ const adminRoutes = require('../router/admin.routes');
 
 const app: Application = express();
 app.use(express.json())
-app.use(cors());
+const corsOptions = {
+  origin: ['http://localhost:3000'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};  
+app.use(cors(corsOptions));
 app.use(express.urlencoded({extended: true}));
 
 app.use('/v1/student', studentRoutes);

@@ -10,13 +10,12 @@ import {
   CardFooter,
   Card,
 } from "@/components/ui/card";
-import Link from "next/link"
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
     <main className="px-4 sm:px-6 lg:px-8">
-
       <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row items-center justify-between transition-colors duration-500">
         <div className="max-w-lg mr-16 mx-auto md:mx-0 md:pl-0">
           <h2 className="text-3xl md:text-5xl font-bold text-[#2a4185] mb-4 md:mb-6">
@@ -30,12 +29,16 @@ export default function Home() {
             Vokalia and Consonantia, there live the blind texts.
           </p>
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-            <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
-              Login as Student
-            </Button>
-            <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
-              Login as Educator
-            </Button>
+            <Link href="/student/login">
+              <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
+                Login as Student
+              </Button>
+            </Link>
+            <Link href="/educator/login">
+              <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
+                Login as Educator
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="image-wrapper mt-6 md:mt-0 md:ml-8 overflow-hidden">
@@ -105,9 +108,7 @@ export default function Home() {
       </div>
 
       <div className="text-center pt-9">
-        <h3>
-          For more such fun courses click below to view more such content
-        </h3>
+        <h3>For more such fun courses click below to view more such content</h3>
         <div className="mt-6">
           <Button className="bg-[#2a4185]">View More Courses</Button>
         </div>
@@ -156,10 +157,9 @@ export default function Home() {
             offering unlimited access to a vast array of educational courses
             tailored to suit your interests and goals. Dive deep into diverse
             subjects, from mathematics to literature, and engage with
-            interactive content curated by experts. Stay ahead of the curve
-            with regular updates and enjoy the flexibility to learn at own
-            pace, anytime, anywhere. Join today to unlock a world of
-            knowledge
+            interactive content curated by experts. Stay ahead of the curve with
+            regular updates and enjoy the flexibility to learn at own pace,
+            anytime, anywhere. Join today to unlock a world of knowledge
           </p>
           <div className="mb-8">
             <p className="text-lg md:text-xl text-[#2a4185] mb-4">

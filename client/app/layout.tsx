@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { Toaster } from "sonner";
+import { AuthProvider } from "@/app/context/Auth";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { EducatorAuthProvider } from "./context/EducatorAuth";
 
 const inter = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -18,9 +21,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
+        <div className="">
 
-        {children}
+          <AuthProvider>
+            <Navbar/>
+          <EducatorAuthProvider>{children}</EducatorAuthProvider>
+          </AuthProvider>
+          <Toaster
+            position="top-right"
+            richColors
+            closeButton
+            duration={2000}
+            pauseWhenPageIsHidden
+            visibleToasts={1}
+          />
+        </div>
       </body>
     </html>
   );
