@@ -22,10 +22,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="">
-
           <AuthProvider>
-            <Navbar/>
-          <EducatorAuthProvider>{children}</EducatorAuthProvider>
+            <EducatorAuthProvider>
+              <Navbar />
+              {children}
+            </EducatorAuthProvider>
           </AuthProvider>
           <Toaster
             position="top-right"

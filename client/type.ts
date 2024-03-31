@@ -36,7 +36,7 @@ export type LoginForm = {
   };
   
   export type AuthContextType = {
-    authState: UserCredential;
+    userAuthState: UserCredential;
     setUserAuthInfo: (data: UserCredential) => void;
     isUserAuthenticated: () => boolean;
   };

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./config.env" });
 import { client } from "../model/db";
 import { QueryResult } from "pg";
+import { ReqMid } from "../types/educator";
 
 export const isStudentAuthenticated = async (
   req: any,
@@ -57,11 +58,11 @@ export const isEducatorAuthenticated = async (
 ) => {
   try {
     const query = `SELECT * FROM educator_token WHERE token=$1`;
-    const authHeader = req.header("Authorization");
-    const token = authHeader ? authHeader.replace("Bearer ", "") : null;
+    // const authHeader = req.header("Authorization");
+    const token = req.body.token;
     const value: any[] = [token];
     const data: QueryResult<any> = await client.query(query, value);
-
+    console.log(token)
     if (data.rowCount === null) {
       return res.json({ status: false, message: "No Educator" });
     }

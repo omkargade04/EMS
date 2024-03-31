@@ -1,3 +1,4 @@
+"use client";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import Eduimg1 from "../public/images/edu-img1.jpg";
@@ -12,8 +13,12 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { useAuth } from "./context/EducatorAuth";
 
 export default function Home() {
+  const {isUserAuthenticated} = useAuth();
+
   return (
     <main className="px-4 sm:px-6 lg:px-8">
       <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row items-center justify-between transition-colors duration-500">
@@ -28,18 +33,20 @@ export default function Home() {
             Far far away, behind the word mountains, far from the countries
             Vokalia and Consonantia, there live the blind texts.
           </p>
-          <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-            <Link href="/student/login">
-              <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
-                Login as Student
-              </Button>
-            </Link>
-            <Link href="/educator/login">
-              <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
-                Login as Educator
-              </Button>
-            </Link>
-          </div>
+          {!isUserAuthenticated() && (
+            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+              <Link href="/student/login">
+                <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
+                  Login as Student
+                </Button>
+              </Link>
+              <Link href="/educator/login">
+                <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
+                  Login as Educator
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="image-wrapper mt-6 md:mt-0 md:ml-8 overflow-hidden">
           <Image

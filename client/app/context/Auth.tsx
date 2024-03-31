@@ -6,7 +6,8 @@ import { useState, useEffect, useContext, createContext, ReactNode } from "react
 const AuthContext = createContext<AuthContextType | null>(null);
 const { Provider } = AuthContext;
 
-const useAuth = (): AuthContextType => {
+const userAuth = (): AuthContextType => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const auth = useContext(AuthContext);
   if (!auth) {
     throw new Error("useAuth must be used within an AuthProvider");
@@ -15,7 +16,7 @@ const useAuth = (): AuthContextType => {
 };
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [authState, setAuthState] = useState<UserCredential>({
+  const [userAuthState, setUserAuthState] = useState<UserCredential>({
     token: "",
     student: {
       name: "",
@@ -33,7 +34,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (userString) {
       try {
         const student = JSON.parse(userString);
-        setAuthState({ token: token || "", student });
+        setUserAuthState({ token: token || "", student });
       } catch (error) {
         console.error("Error parsing user data from localStorage:", error);
       }
@@ -47,17 +48,17 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const setUserAuthInfo = (data: UserCredential) => {
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.student));
-    setAuthState(data);
+    setUserAuthState(data);
   };
 
   const isUserAuthenticated = () => {
-    return !!authState.token;
+    return !!userAuthState.token;
   };
 
   return (
     <Provider
       value={{
-        authState,
+        userAuthState,
         setUserAuthInfo,
         isUserAuthenticated,
       }}
@@ -67,4 +68,4 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export { AuthProvider, useAuth };
+export { AuthProvider, userAuth };

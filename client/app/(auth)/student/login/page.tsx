@@ -21,7 +21,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/app/context/Auth";
+import { userAuth } from "@/app/context/Auth";
 import { studentLogin } from "@/app/api/auth";
 
 const BASEURL = process.env.NEXT_PUBLIC_BASEURL;
@@ -30,7 +30,7 @@ const page = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { setUserAuthInfo } = useAuth();
+  const { setUserAuthInfo } = userAuth();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [userData, setUserData] = useState<LoginForm>({
     email: "",

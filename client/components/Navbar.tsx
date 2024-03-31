@@ -1,51 +1,94 @@
+"use client";
 import Link from "next/link";
 import { JSX, SVGProps } from "react";
+import { Button } from "./ui/button";
+import axios from "axios";
+import { toast } from "sonner";
+import { useAuth } from "@/app/context/EducatorAuth";
+import { userAuth } from "@/app/context/Auth";
+
+
+const BASEURL = process.env.NEXT_PUBLIC_BASEURL;
 
 export default function Navbar() {
-    return (
-      <nav className="bg-white shadow-md dark:bg-gray-50 z-10">
-        <div className="w-full max-w-7xl mx-auto">
-          <div className="px-4 md:px-6">
-            <div className=" flex h-14  justify-between items-center">
-              <Link className="flex" href="#">
-                <FlagIcon className="h-6 w-6" />
-                <span className="text-black">Logo</span>
+  const {authState, isUserAuthenticated} = useAuth();
+  const {userAuthState} = userAuth()
+  const name = authState.educator.name;
+  const studentName = userAuthState.student.name
+
+  console.log(name);
+
+  const handleLogOut = async() => {
+    try {
+      const response = await axios.post(`${BASEURL}/v1/educator/logout`, {
+        token: authState.token,
+      });
+      console.log(response)
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      toast.success(response.data.success);
+      window.location.reload();
+    } catch (err:any) {
+      toast.error(err.response.data.message);
+      console.log("Error", err);
+      
+    }
+  }
+
+  return (
+    <nav className="bg-white shadow-md dark:bg-gray-50 z-10">
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="px-4 md:px-6">
+          <div className=" flex h-14  justify-between items-center">
+            <Link className="flex" href="#">
+              <FlagIcon className="h-6 w-6" />
+              <span className="text-black">Logo</span>
+            </Link>
+            <div className="flex space-x-4">
+              <Link
+                className="font-medium inline-flex h-9 items-center rounded-md hover:bg-gray-100 hover:text-gray-900 px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+                href="#"
+              >
+                Home
               </Link>
-              <div className="flex space-x-4">
-                <Link
-                  className="font-medium inline-flex h-9 items-center rounded-md hover:bg-gray-100 hover:text-gray-900 px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
-                  href="#"
-                >
-                  Home
-                </Link>
-                <Link
-                  className="font-medium inline-flex h-9 items-center rounded-md hover:bg-gray-100 hover:text-gray-900 px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
-                  href="#"
-                >
-                  Courses
-                </Link>
-                <Link
-                  className="font-medium inline-flex h-9 items-center rounded-md hover:bg-gray-100 hover:text-gray-900 px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
-                  href="#"
-                >
-                  Subscriptions
-                </Link>
-                <Link
-                  className="font-medium inline-flex h-9 items-center rounded-md hover:bg-gray-100 hover:text-gray-900 px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
-                  href="#"
-                >
-                  About
-                </Link>
-              </div>
-              <div>
-                  User
-              </div>
+              <Link
+                className="font-medium inline-flex h-9 items-center rounded-md hover:bg-gray-100 hover:text-gray-900 px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+                href="#"
+              >
+                Courses
+              </Link>
+              <Link
+                className="font-medium inline-flex h-9 items-center rounded-md hover:bg-gray-100 hover:text-gray-900 px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+                href="#"
+              >
+                Subscriptions
+              </Link>
+              <Link
+                className="font-medium inline-flex h-9 items-center rounded-md hover:bg-gray-100 hover:text-gray-900 px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+                href="#"
+              >
+                About
+              </Link>
             </div>
+            {isUserAuthenticated() ? (
+              <div className="flex justify-center items-center gap-4">
+                <div className="">{name}</div>
+                <Button onClick={handleLogOut}>Logout</Button>
+              </div>
+            ) : (
+              <Link
+                className="font-medium inline-flex h-9 items-center rounded-md hover:bg-gray-100 hover:text-gray-900 px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+                href="/educator/login"
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
-      </nav>
-    );
-  }
+      </div>
+    </nav>
+  );
+}
 
 function FlagIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (

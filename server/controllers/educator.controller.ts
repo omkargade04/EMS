@@ -171,6 +171,8 @@ const logout = async (req: ReqMid, res: Response) => {
     return res.status(401).json({ error: "You are already logged out" });
   }
 
+  console.log(req.token)
+
   const removeEducator: string = "DELETE FROM educator_token WHERE token = $1";
 
   const value: any[] = [req.token];
