@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/app/context/Auth";
-import "./globals.css";
+import "../globals.css";
 import Navbar from "@/components/Navbar";
-import { EducatorAuthProvider } from "./context/EducatorAuth";
 
 const inter = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -23,10 +22,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="">
           <AuthProvider>
-            <EducatorAuthProvider>
               <Navbar />
               {children}
-            </EducatorAuthProvider>
           </AuthProvider>
           <Toaster
             position="top-right"

@@ -1,8 +1,6 @@
 "use client";
-import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import Eduimg1 from "../public/images/edu-img1.jpg";
-import CourseImg from "../public/images/female-student-listening-webinar-online_74855-6461.png";
+import Eduimg1 from "@/public/images/edu-img1.jpg";
 import {
   CardTitle,
   CardDescription,
@@ -14,10 +12,10 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { useAuth } from "./context/EducatorAuth";
+import { useAuth } from "../context/Auth";
 
 export default function Home() {
-  const {isUserAuthenticated} = useAuth();
+  const { isUserAuthenticated } = useAuth();
 
   return (
     <main className="px-4 sm:px-6 lg:px-8">
@@ -35,14 +33,14 @@ export default function Home() {
           </p>
           {!isUserAuthenticated() && (
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-              <Link href="/student/login">
+              <Link href="/student/register">
                 <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
-                  Login as Student
+                  Register as Student
                 </Button>
               </Link>
-              <Link href="/educator/login">
+              <Link href="/educator/register">
                 <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
-                  Login as Educator
+                  Register as Educator
                 </Button>
               </Link>
             </div>
@@ -117,7 +115,9 @@ export default function Home() {
       <div className="text-center pt-9">
         <h3>For more such fun courses click below to view more such content</h3>
         <div className="mt-6">
-          <Button className="bg-[#2a4185]">View More Courses</Button>
+          <Link href="/courses">
+            <Button className="bg-[#2a4185]">View More Courses</Button>
+          </Link>
         </div>
       </div>
 

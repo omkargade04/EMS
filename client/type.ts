@@ -1,16 +1,30 @@
 export type LoginForm = {
     email: string;
     password: string;
+    role: string;
   };
   
   export type RegisterForm = {
     name: string;
     email: string;
     password: string;
+    role: string,
+    institute: string,
+    experience: number,
+  };
+
+  export type UserRegisterForm = {
+    name: string;
+    email: string;
+    role: string,
+    password: string;
   };
   export type UserData = {
     name: string;
     email: string;
+    role: string;
+    experience: number,
+    institute: string,
     password: string;
     token: string;
     createdAt: string;
@@ -27,22 +41,22 @@ export type LoginForm = {
   
   export type UserCredential = {
     token: string;
-    student: UserData;
+    user: UserData;
   };
 
-  export type EducatorCredential = {
-    token: string;
-    educator: UserData;
-  };
+  // export type EducatorCredential = {
+  //   token: string;
+  //   educator: UserData;
+  // };
   
   export type AuthContextType = {
-    userAuthState: UserCredential;
+    authState: UserCredential;
     setUserAuthInfo: (data: UserCredential) => void;
     isUserAuthenticated: () => boolean;
   };
 
-  export type EducatorAuthContextType = {
-    authState: EducatorCredential;
-    setEducatorAuthInfo: (data: EducatorCredential) => void;
-    isUserAuthenticated: () => boolean;
-  };
+  // export type EducatorAuthContextType = {
+  //   authState: EducatorCredential;
+  //   setEducatorAuthInfo: (data: EducatorCredential) => void;
+  //   isUserAuthenticated: () => boolean;
+  // };

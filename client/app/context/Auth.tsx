@@ -6,8 +6,7 @@ import { useState, useEffect, useContext, createContext, ReactNode } from "react
 const AuthContext = createContext<AuthContextType | null>(null);
 const { Provider } = AuthContext;
 
-const userAuth = (): AuthContextType => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const useAuth = (): AuthContextType => {
   const auth = useContext(AuthContext);
   if (!auth) {
     throw new Error("useAuth must be used within an AuthProvider");
@@ -16,11 +15,14 @@ const userAuth = (): AuthContextType => {
 };
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [userAuthState, setUserAuthState] = useState<UserCredential>({
+  const [authState, setUserAuthState] = useState<UserCredential>({
     token: "",
-    student: {
+    user: {
       name: "",
       email: "",
+      role: "",
+      experience: 0,
+      institute: "",
       password: "",
       token: "",
       createdAt: "",
@@ -33,8 +35,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     const userString = localStorage.getItem("user");
     if (userString) {
       try {
-        const student = JSON.parse(userString);
-        setUserAuthState({ token: token || "", student });
+        const user = JSON.parse(userString);
+        setUserAuthState({ token: token || "", user });
       } catch (error) {
         console.error("Error parsing user data from localStorage:", error);
       }
@@ -47,18 +49,18 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const setUserAuthInfo = (data: UserCredential) => {
     localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.student));
+    localStorage.setItem("user", JSON.stringify(data.user));
     setUserAuthState(data);
   };
 
   const isUserAuthenticated = () => {
-    return !!userAuthState.token;
+    return !!authState.token;
   };
 
   return (
     <Provider
       value={{
-        userAuthState,
+        authState,
         setUserAuthInfo,
         isUserAuthenticated,
       }}
@@ -68,4 +70,4 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export { AuthProvider, userAuth };
+export { AuthProvider, useAuth };

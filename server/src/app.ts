@@ -8,6 +8,7 @@ const studentRoutes = require('../router/student.routes');
 const educatorRoutes = require('../router/educator.routes');
 const courseRoutes = require('../router/course.routes');
 const adminRoutes = require('../router/admin.routes');
+const userRoutes = require('../router/user.routes');
 
 const app: Application = express();
 app.use(express.json())
@@ -20,6 +21,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.urlencoded({extended: true}));
 
+app.use('/v1/user', userRoutes);
 app.use('/v1/student', studentRoutes);
 app.use('/v1/educator', educatorRoutes)
 app.use("/v1/course", courseRoutes);

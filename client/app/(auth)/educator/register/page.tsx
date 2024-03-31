@@ -33,23 +33,36 @@ const page = () => {
     name: "",
     email: "",
     password: "",
+    role: "",
+    institute: "",
+    experience: 0,
   });
 
   const handleSubmit = async () => {
     const name = userData.name;
     const email = userData.email;
     const password = userData.password;
+    const role = userData.role;
+    const institute = userData.institute;
+    const experience = userData.experience;
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !role || !institute || !experience) {
       toast.error("All fields required");
       return;
     }
 
     try {
-      const response = await educatorSignup(name, email, password);
+      const response = await educatorSignup(
+        name,
+        email,
+        role,
+        institute,
+        experience,
+        password
+      );
       toast.success(response.message);
       console.log("response:", response);
-      router.push("/educator/login");
+      router.push("/login");
     } catch (err: any) {
       toast.error(err.response.message);
       console.log("Error", err);
@@ -58,8 +71,8 @@ const page = () => {
 
   return (
     <main className="bg-[#5865F2] flex justify-center items-center h-screen">
-      <Card className="w-3/4 sm:w-1/2 p-2 lg:p-8 rounded-xl bg-[#3f4146] text-white border border-[#313338] flex justify-center items-center">
-        <div className="lg:border-r lg:border-r-[#aaafbc] lg:pr-8">
+      <Card className="p-10  rounded-xl bg-[#3f4146] text-white border border-[#313338] flex justify-center items-center">
+        <div className="">
           <CardHeader className="mb-5 flex justify-center items-center ">
             <CardTitle className="mb-2">Educator Register</CardTitle>
             <CardDescription className="text-sm text-center">
@@ -70,45 +83,94 @@ const page = () => {
           <CardContent>
             <form>
               <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-4">
-                  <div className="">
-                    <Label htmlFor="name">Full Name</Label>
-                    <Input
-                      id="name"
-                      type="text"
-                      placeholder="Full Name"
-                      className="mt-2 bg-[#3f4146] border border-gray-400 rounded-xl placeholder:text-gray-400"
-                      value={userData.name}
-                      onChange={(e) =>
-                        setUserData({ ...userData, name: e.target.value })
-                      }
-                    />
-                  </div>{" "}
-                  <div className="">
-                    <Label htmlFor="name">Email Address</Label>
-                    <Input
-                      id="name"
-                      type="email"
-                      placeholder="Email Address"
-                      className="mt-2 bg-[#3f4146] border border-gray-400 rounded-xl placeholder:text-gray-400"
-                      value={userData.email}
-                      onChange={(e) =>
-                        setUserData({ ...userData, email: e.target.value })
-                      }
-                    />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div className="space-y-4">
+                    <div className="">
+                      <Label htmlFor="name">Full Name</Label>
+                      <Input
+                        id="name"
+                        type="text"
+                        placeholder="Full Name"
+                        className="mt-2 bg-[#3f4146] border border-gray-400 rounded-xl placeholder:text-gray-400"
+                        value={userData.name}
+                        onChange={(e) =>
+                          setUserData({ ...userData, name: e.target.value })
+                        }
+                      />
+                    </div>{" "}
+                    <div className="">
+                      <Label htmlFor="name">Email Address</Label>
+                      <Input
+                        id="name"
+                        type="email"
+                        placeholder="Email Address"
+                        className="mt-2 bg-[#3f4146] border border-gray-400 rounded-xl placeholder:text-gray-400"
+                        value={userData.email}
+                        onChange={(e) =>
+                          setUserData({ ...userData, email: e.target.value })
+                        }
+                      />
+                    </div>
+                    <div className="">
+                      <Label htmlFor="name">Role</Label>
+                      <Input
+                        id="role"
+                        type="text"
+                        placeholder="Educator"
+                        className="mt-2 bg-[#3f4146] border border-gray-400 rounded-xl placeholder:text-gray-400"
+                        value={userData.role}
+                        onChange={(e) =>
+                          setUserData({ ...userData, role: e.target.value })
+                        }
+                      />
+                    </div>
                   </div>
-                  <div className="">
-                    <Label htmlFor="name">Password</Label>
-                    <Input
-                      id="name"
-                      type="password"
-                      placeholder="Password"
-                      className="mt-2 bg-[#3f4146] border border-gray-400 rounded-xl placeholder:text-gray-400"
-                      value={userData.password}
-                      onChange={(e) =>
-                        setUserData({ ...userData, password: e.target.value })
-                      }
-                    />
+                  <div className="space-y-4">
+                    <div className="">
+                      <Label htmlFor="name">Institute</Label>
+                      <Input
+                        id="institute"
+                        type="text"
+                        placeholder="Institute"
+                        className="mt-2 bg-[#3f4146] border border-gray-400 rounded-xl placeholder:text-gray-400"
+                        value={userData.institute}
+                        onChange={(e) =>
+                          setUserData({
+                            ...userData,
+                            institute: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="">
+                      <Label htmlFor="name">Experience</Label>
+                      <Input
+                        id="experience"
+                        type="number"
+                        placeholder="Experience"
+                        className="mt-2 bg-[#3f4146] border border-gray-400 rounded-xl placeholder:text-gray-400"
+                        value={userData.experience.toString()}
+                        onChange={(e) =>
+                          setUserData({
+                            ...userData,
+                            experience: parseInt(e.target.value)
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="">
+                      <Label htmlFor="name">Password</Label>
+                      <Input
+                        id="name"
+                        type="password"
+                        placeholder="Password"
+                        className="mt-2 bg-[#3f4146] border border-gray-400 rounded-xl placeholder:text-gray-400"
+                        value={userData.password}
+                        onChange={(e) =>
+                          setUserData({ ...userData, password: e.target.value })
+                        }
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -124,22 +186,10 @@ const page = () => {
             <p className="text-xs">
               Already have an account?{" "}
               <span className="text-[#7c87ff]">
-                <Link href="/educator/login">Login</Link>
+                <Link href="/login">Login</Link>
               </span>
             </p>
           </CardFooter>
-        </div>
-        <div className="md:pl-8 hidden lg:block">
-          <div className="space-y-6 flex flex-col justify-center items-center">
-            <div className="text-center font-bold text-3xl ">Create your <span className="text-[#7c87ff]">Courses</span></div>
-            <Image
-              src={registerImage}
-              alt="register-image"
-              height={300}
-              width={300}
-              className=" border rounded-xl"
-            />
-          </div>
         </div>
       </Card>
     </main>

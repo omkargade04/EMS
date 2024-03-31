@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 import { useState } from "react";
-import { RegisterForm } from "@/type";
+import { UserRegisterForm } from "@/type";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
@@ -29,32 +29,33 @@ const page = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [userData, setUserData] = useState<RegisterForm>({
+  const [userData, setUserData] = useState<UserRegisterForm>({
     name: "",
     email: "",
+    role: "",
     password: "",
   });
 
   const handleSubmit = async () => {
     const name = userData.name;
     const email = userData.email;
+    const role = userData.role;
     const password = userData.password;
 
     console.log("User Name: ",name);
     console.log("User email: ",email);
     console.log("User password: ",password);
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !role) {
       toast.error("All fields required");
       return;
     }
 
     try {
-      const response = await studentSignup(name, email, password);
+      const response = await studentSignup(name, email, role, password);
       console.log("This is reposne: ",response)
       toast.success(response.message);
-    //   console.log("response:", response);
-      router.push("/student/login");
+      router.push("/login");
     } catch (err: any) {
     //   toast.error(err.response.message);
       console.log("Error", err);
@@ -103,6 +104,19 @@ const page = () => {
                     />
                   </div>
                   <div className="">
+                    <Label htmlFor="name">Role</Label>
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="Student"
+                      className="mt-2 bg-[#3f4146] border border-gray-400 rounded-xl placeholder:text-gray-400"
+                      value={userData.role}
+                      onChange={(e) =>
+                        setUserData({ ...userData, role: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="">
                     <Label htmlFor="name">Password</Label>
                     <Input
                       id="name"
@@ -129,7 +143,7 @@ const page = () => {
             <p className="text-xs">
               Already have an account?{" "}
               <span className="text-[#7c87ff]">
-                <Link href="/student/login">Login</Link>
+                <Link href="/login">Login</Link>
               </span>
             </p>
           </CardFooter>
