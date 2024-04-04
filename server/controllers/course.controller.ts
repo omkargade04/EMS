@@ -4,7 +4,12 @@ import { ReqMid } from "../types/educator";
 
 const getAllCourses = async (req: any, res: any) => {
   try {
-    const courseQuery: string = `SELECT c.id, c.title, c.description, c.price, e.name, e.email FROM course AS c JOIN educators AS e ON e.educator_id = c.fk_educator `;
+    const page = req.query.page ? parseInt(req.query.page) : 1; 
+    const limit = req.query.limit ? parseInt(req.query.limit) : 3; 
+
+    const offset = (page - 1) * limit;
+
+    const courseQuery: string = `SELECT c.id, c.title, c.description, c.price, e.name, e.email FROM course AS c JOIN educators AS e ON e.educator_id = c.fk_educator LIMIT ${limit} OFFSET ${offset}`;
     const courseResult = await client.query(courseQuery);
 
     if (courseResult.rowCount === 0) {
@@ -19,13 +24,14 @@ const getAllCourses = async (req: any, res: any) => {
       .json({
         status: true,
         data: courseResult.rows,
-        message: "All courses retrived",
+        message: "All courses retrieved",
       });
   } catch (err: any) {
     console.log("This is error: ", err);
     res.status(500).json({ status: false, message: "Internal Server Error" });
   }
 };
+
 
 const getACourse = async (req: any, res: any) => {
   const course_id = req.params.courseId;

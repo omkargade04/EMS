@@ -50,18 +50,26 @@ const educatorsCourses = async(req: ReqMid, res: any) => {
   }
 }
 
-const getMyCourses = async(req: ReqMid, res: any) => {
-  try{
+const getMyCourses = async (req: ReqMid, res: any) => {
+  try {
     const educator_id = req.educator.educator_id;
-    console.log(educator_id);
-    const query = `SELECT * FROM course WHERE fk_educator=${educator_id}`;
+    const page = req.query.page ? parseInt(String(req.query.page)) : 1; 
+    const limit = req.query.limit ? parseInt(String(req.query.limit)) : 3; 
+
+    const offset = (page - 1) * limit;
+    const query = `SELECT * FROM course WHERE fk_educator=${educator_id} LIMIT ${limit} OFFSET ${offset}`;
     const data = await client.query(query);
-    res.status(200).json({status: true, data: data.rows, message: "Educator's courses retrieved"})
-  }catch(err: any){
-    console.log("Errorooooo:  ", err);
-    res.json({status: false, message: "Internal server error"});
+
+    res.status(200).json({
+      status: true,
+      data: data.rows,
+      message: "Educator's courses retrieved",
+    });
+  } catch (err: any) {
+    console.log("Error: ", err);
+    res.status(500).json({ status: false, message: "Internal server error" });
   }
-}
+};
 
 const educatorVerification = async(req: any, res: any) => {
   const {name, email, password} = req.body;

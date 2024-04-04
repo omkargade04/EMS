@@ -140,21 +140,26 @@ const purchaseCourse = async (req: ReqMid, res: any) => {
   }
 };
 
-const getMyCourses = async (req: ReqMid, res: any) => {
+const getMyCourses = async (req: ReqMid,  res: any) => {
   try {
     const student_id = req.student.student_id;
+    const page = req.query.page ? parseInt(String(req.query.page)) : 1; 
+    const limit = req.query.limit ? parseInt(String(req.query.limit)) : 3;  
 
-    const getQuery = `SELECT c.id, c.title, c.description, c.imageUrl, c.price FROM course AS c JOIN purchase AS p ON c.id = p.fk_course WHERE p.fk_student = ${student_id};`;
+    const offset = (page - 1) * limit;
+    const getQuery = `SELECT c.id, c.title, c.description, c.imageUrl, c.price 
+                      FROM course AS c 
+                      JOIN purchase AS p ON c.id = p.fk_course 
+                      WHERE p.fk_student = ${student_id}
+                      LIMIT ${limit} OFFSET ${offset}`;
     const result: QueryResult<any> = await client.query(getQuery);
     const data = result.rows;
-    console.log(result.rows);
-    res
-      .status(200)
-      .json({
-        status: true,
-        data: data,
-        message: "Retrieved all student courses",
-      });
+
+    res.status(200).json({
+      status: true,
+      data: data,
+      message: "Retrieved all student courses",
+    });
   } catch (err: any) {
     console.log("Error: ", err);
     res.status(500).json({ status: false, message: "Internal server error" });
