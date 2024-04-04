@@ -61,6 +61,12 @@ export default function Navbar() {
               </Link>
               <Link
                 className="font-medium inline-flex h-9 items-center rounded-md hover:bg-black hover:text-white  px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+                href="/courses/my-courses"
+              >
+                My Courses
+              </Link>
+              <Link
+                className="font-medium inline-flex h-9 items-center rounded-md hover:bg-black hover:text-white  px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
                 href="/courses"
               >
                 Subscriptions

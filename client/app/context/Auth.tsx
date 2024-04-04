@@ -24,7 +24,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       experience: 0,
       institute: "",
       password: "",
-      token: "",
       createdAt: "",
       expiresAt: "",
     },
@@ -48,7 +47,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   
 
   const setUserAuthInfo = (data: UserCredential) => {
-    localStorage.setItem("token", data.token);
+    localStorage.setItem("token", data.token!);
     localStorage.setItem("user", JSON.stringify(data.user));
     setUserAuthState(data);
   };

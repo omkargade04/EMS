@@ -76,12 +76,56 @@ create table courses(
     constraint fk_educator foreign key(fk_educator) references educators(educator_id) on delete cascade on update cascade
 );
 
+create table course(
+    id serial primary key,
+    fk_educator int,
+    title varchar(255),
+    description varchar(255),
+    imageUrl varchar(255),
+    price float,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
+);
+
+create table chapters(
+    chapter_id serial primary key,
+    title varchar(255),
+    description varchar(255),
+    position int,
+    isPublished boolean default false,
+    isFree boolean default false
+    fk_course int,
+    purchases varchar(255)[] default array[]::varchar(255)[],
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
+    constraint fk_course foreign key(fk_course) references course(id) on delete cascade on update cascade
+);
+
+create table purchase(
+    purchase_id serial primary key,
+    fk_student int,
+    fk_course int,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp,
+    constraint fk_course foreign key(fk_course) references course(id) on delete cascade on update cascade,
+    constraint fk_student foreign key(fk_student) references students(student_id) on delete cascade on update cascade
+);
+
+create table stripeCustomer(
+    stripe_id varchar(255) primary key,
+    fk_student int,
+    stripeCustomerId int,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp 
+);
+
 create table admins(
     admin_id serial primary key, 
     name varchar(255) not null,
     password varchar(255) unique not null,
     created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp
+    updated_at timestamp default current_timestamp,
+    constraint fk_educator foreign key(fk_educator) references educators(educator_id) on delete cascade on update cascade
 );
 
 create table admin_token(

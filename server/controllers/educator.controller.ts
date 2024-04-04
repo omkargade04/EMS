@@ -8,30 +8,59 @@ require("dotenv").config();
 
 
 const createCourse = async(req: ReqMid, res: any) => {
-    const {course_title, course_description, course_price} = req.body;
-    if(!course_title || !course_description){
-        return res.status(400).json({status: false, message: "Please fill course details"});
-    }
-    if(!course_price){
-        return res.status(400).json({status: false, message: "Please fill course price"});
-    }
-    const timestamp : string = new Date().toISOString();
-    try{
-        const educator_id = req.educator.educator_id;
-        const courseQuery: string = `INSERT INTO courses(course_title, course_description, course_price, fk_educator, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6)`;
-        const courseParams: any[] = [course_title, course_description, course_price, educator_id, timestamp, timestamp];
-        const courseData = await client.query(courseQuery, courseParams);
+  try{
+    const educator_id = req.educator.educator_id;
+    const {title} = req.body;
+    console.log(title);
+    const query: string = `INSERT INTO course(fk_educator, title) VALUES($1, $2)`;
+    const params: any[] = [educator_id, title];
+    const result = await client.query(query, params);
+    console.log(result.rowCount);
 
-        console.log(courseData);
-        
-        if(courseData.rowCount === 1){
-            res.status(201).json({status: true, message: "New course created"});
-        }else{
-            res.status(400).json({status: false, message: "Error creating course"});
-        }
-    }catch(err: any){
-        res.status(500).json({status: false, message: "Internal Server Error"});
+    const getquery: string = `SELECT * FROM course WHERE title=$1 `;
+    const getparams: any[] = [title];
+    const getresult = await client.query(getquery, getparams);
+    const data = getresult.rows[0]
+    console.log(data);
+    res.status(200).json({status: true, data: data, message: "New Course created"});
+  }catch(err: any){
+    console.log('Error: ', err);
+    res.status(500).json({status: false, message: "Internal server error"});
+  }
+}
+
+const educatorsCourses = async(req: ReqMid, res: any) => {
+  try{
+    const educator_id = req.educator.educator_id;
+    console.log("Educator id: ", educator_id);
+
+    const getCoursesQuery: string = `SELECT * FROM courses WHERE fk_educator = $1`;
+    const getCoursesParam: any[] = [educator_id];
+    const getcourseResult: QueryResult<any> = await client.query(getCoursesQuery, getCoursesParam);
+    const data = getcourseResult.rows;
+
+    if(getcourseResult.rowCount === 0){
+      return res.status(400).json({status: false, message: "No course found"});
     }
+
+    res.status(200).json({status: true, data: data, message: "Educator's courses retrived"});
+  }catch(err: any){
+    console.log("This is Error: ", err);
+    res.status(500).json({status: false, message: "Internal server error"});
+  }
+}
+
+const getMyCourses = async(req: ReqMid, res: any) => {
+  try{
+    const educator_id = req.educator.educator_id;
+    console.log(educator_id);
+    const query = `SELECT * FROM course WHERE fk_educator=${educator_id}`;
+    const data = await client.query(query);
+    res.status(200).json({status: true, data: data.rows, message: "Educator's courses retrieved"})
+  }catch(err: any){
+    console.log("Errorooooo:  ", err);
+    res.json({status: false, message: "Internal server error"});
+  }
 }
 
 const educatorVerification = async(req: any, res: any) => {
@@ -61,7 +90,7 @@ const educatorVerification = async(req: any, res: any) => {
   }
 }
 
-export const logout = async (req: ReqMid, res: any) => {
+const logout = async (req: ReqMid, res: any) => {
   if (!req.token) {
     return res.status(401).json({ error: "You are already logged out" });
   }
@@ -83,4 +112,4 @@ export const logout = async (req: ReqMid, res: any) => {
   }
 };
 
-module.exports = { createCourse, educatorVerification, logout };
+module.exports = { createCourse, educatorVerification, educatorsCourses, getMyCourses, logout };

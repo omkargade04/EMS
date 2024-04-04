@@ -2,9 +2,10 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./config.env" });
 import { client } from "../model/db";
 import { ReqMid } from "../types/student";
-import { QueryResult } from "pg";
+import { Query, QueryResult } from "pg";
+import Stripe from "stripe";
 require("dotenv").config();
-
+import { stripe } from "../lib/stripe";
 
 const enrollForACourse = async (req: ReqMid, res: any) => {
   const course_id = req.params.id;
@@ -29,12 +30,10 @@ const enrollForACourse = async (req: ReqMid, res: any) => {
     const { enrolled } = checkResult.rows[0];
 
     if (enrolled) {
-      return res
-        .status(400)
-        .json({
-          status: false,
-          message: "Student already enrolled in the course",
-        });
+      return res.status(400).json({
+        status: false,
+        message: "Student already enrolled in the course",
+      });
     }
 
     //details of student
@@ -56,12 +55,126 @@ const enrollForACourse = async (req: ReqMid, res: any) => {
     console.log(studentResult.rows[0]);
 
     res.status(200).json({ status: true, message: "Enrolled for the course" });
-
   } catch (err: any) {
     console.log("This is error: ", err);
     res.status(500).json({ status: false, message: "Internal server error" });
   }
 };
+
+const courseCheckout = async (req: ReqMid, res: any) => {
+  try {
+    const course_id = req.params.id;
+    const student_id = req.student.student_id;
+    const student_email = req.student.email;
+
+    const courseQuery = `SELECT * FROM course WHERE id=${course_id}`;
+    const courseData = await client.query(courseQuery);
+    console.log(courseData.rows[0]);
+    const course = courseData.rows[0];
+
+    const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [
+      {
+        quantity: 1,
+        price_data: {
+          currency: "INR",
+          product_data: {
+            name: course.title,
+            description: course.description!,
+          },
+          unit_amount: Math.round(course.price! * 100),
+        },
+      },
+    ];
+
+    let stripeQuery = `SELECT * FROM stripeCustomer WHERE fk_student=${student_id}`;
+    let stripeCustomer = await client.query(stripeQuery);
+    // console.log("Stripe Customer Row count: ",stripeCustomer.rowCount)
+    if (stripeCustomer.rowCount === 0) {
+      const customer = await stripe.customers.create({
+        email: student_email,
+      });
+
+      const stripeQuery: string = `INSERT INTO stripeCustomer(fk_student, stripe_id) VALUES($1, $2)`;
+      const stripeParams: any[] = [student_id, customer.id];
+      await client.query(stripeQuery, stripeParams);
+      console.log(customer.id);
+      const getCustomer: string = `SELECT * FROM stripeCustomer WHERE stripe_id=${customer.id}`;
+      stripeCustomer = await client.query(getCustomer);
+    }
+    console.log("Stripe Customer Data: ", stripeCustomer.rows[0]);
+    const session = await stripe.checkout.sessions.create({
+      customer: stripeCustomer.rows[0].stripe_id,
+      line_items,
+      mode: "payment",
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course_id}?success=1`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course_id}?canceled=1`,
+      metadata: {
+        courseId: course_id,
+        studentId: student_id,
+      },
+    });
+    res
+      .status(200)
+      .json({ status: true, url: session.url, message: "Proceed to payment" });
+  } catch (err: any) {
+    console.log("error: ", err);
+    res.status(500).json({ status: false, message: "Internal server error" });
+  }
+};
+
+const purchaseCourse = async (req: ReqMid, res: any) => {
+  try {
+    const courseId = req.params.id;
+    const studentId = req.student.student_id;
+
+    const query = `INSERT INTO purchase(fk_student, fk_course) VALUES($1, $2)`;
+    const params: any[] = [studentId, courseId];
+    const result = await client.query(query, params);
+
+    console.log(result);
+
+    res.status(200).json({ status: true, message: "Course purchased" });
+  } catch (err: any) {
+    console.log("error: ", err);
+    res.status(500).json({ status: false, message: "Internal server error" });
+  }
+};
+
+const getMyCourses = async (req: ReqMid, res: any) => {
+  try {
+    const student_id = req.student.student_id;
+
+    const getQuery = `SELECT c.id, c.title, c.description, c.imageUrl, c.price FROM course AS c JOIN purchase AS p ON c.id = p.fk_course WHERE p.fk_student = ${student_id};`;
+    const result: QueryResult<any> = await client.query(getQuery);
+    const data = result.rows;
+    console.log(result.rows);
+    res
+      .status(200)
+      .json({
+        status: true,
+        data: data,
+        message: "Retrieved all student courses",
+      });
+  } catch (err: any) {
+    console.log("Error: ", err);
+    res.status(500).json({ status: false, message: "Internal server error" });
+  }
+};
+
+const alreadyPurchased = async(req: ReqMid, res: any) => {
+  try{
+    const courseId =req.params.id;
+    const query: string = `SELECT * FROM purchase WHERE fk_coures = ${courseId}`;
+    const result: QueryResult<any> = await client.query(query);
+    if(result.rowCount === 0){
+      return res.status(200).json({status: true, message: "Proceed to payment"});
+    }
+    res.status(400).json({status: false, message: "Already applied for the course"});
+  }catch(err: any){
+    console.log("Error: ", err);
+    res.status(500).json({status: false, message: "Internal server error"});
+  }
+}
 
 const logout = async (req: ReqMid, res: any) => {
   if (!req.token) {
@@ -75,7 +188,9 @@ const logout = async (req: ReqMid, res: any) => {
   try {
     const result: QueryResult<any> = await client.query(removeStudent, value);
 
-    return res.status(200).json({ success: "Student logged out successfully!" });
+    return res
+      .status(200)
+      .json({ success: "Student logged out successfully!" });
   } catch (err: any) {
     return res
       .status(500)
@@ -83,4 +198,11 @@ const logout = async (req: ReqMid, res: any) => {
   }
 };
 
-module.exports = { enrollForACourse, logout };
+module.exports = {
+  enrollForACourse,
+  getMyCourses,
+  courseCheckout,
+  purchaseCourse,
+  alreadyPurchased,
+  logout,
+};

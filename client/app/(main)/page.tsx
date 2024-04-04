@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Eduimg1 from "@/public/images/edu-img1.jpg";
+import Stripeimg1 from "@/public/images/png-clipart-colored-stripes-stripe-geometric-patterns.png";
 import {
   CardTitle,
   CardDescription,
@@ -19,9 +20,36 @@ export default function Home() {
 
   return (
     <main className="px-4 sm:px-6 lg:px-8">
-      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row items-center justify-between transition-colors duration-500">
+      {/* <Image 
+        alt="Hero"
+        className="aspect-[1] object-cover object-center bg-transparent"
+        height={100}
+        src={Stripeimg1}
+        width={2000}
+      /> */}
+      <div className="relative max-w-7xl w-full mx-auto overflow-hidden rounded-t-lg">
+        <Image
+          alt="Hero"
+          className="aspect-[1] flex justify-center items-center object-cover object-center"
+          height={400}
+          src={Eduimg1}
+          width={900}
+        />
+        <div className="absolute inset-0 bg-[rgba(255,255,255,0.75)] backdrop-blur flex items-center justify-center p-4">
+          <div className="grid gap-4 text-center">
+            <h1 className="text-6xl font-bold text-[#2a4185] tracking-tighter sm:text-8xl ">
+              WELCOME TO ACADEMIA
+            </h1>
+            <p className="mx-auto max-w-2xl text-gray-500 md:text-xl/relaxed dark:text-gray-400">
+              Introduce your child to the world of programming with our fun and
+              interactive coding courses designed for kids aged 8-12.
+            </p>
+          </div>
+        </div>
+      </div>
+      {/* <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row items-center justify-between transition-colors duration-500">
         <div className="max-w-lg mr-16 mx-auto md:mx-0 md:pl-0">
-          <h2 className="text-3xl md:text-5xl font-bold text-[#2a4185] mb-4 md:mb-6">
+          <h2 className="text-7xl  md:text-7xl font-bold text-[#2a4185] mb-4 md:mb-6">
             WELCOME TO ACADEMIA
           </h2>
           <p className="text-lg md:text-2xl font-bold text-[#eb5f9e] mb-3">
@@ -55,7 +83,7 @@ export default function Home() {
             className="object-contain"
           ></Image>
         </div>
-      </header>
+      </header> */}
 
       <h2 className="text-center text-3xl md:text-5xl font-semibold text-[#eb5f9e] pt-10">
         Our Learning Library

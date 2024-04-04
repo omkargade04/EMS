@@ -1,3 +1,5 @@
+import { Key, ReactNode } from "react";
+
 export type LoginForm = {
     email: string;
     password: string;
@@ -26,7 +28,6 @@ export type LoginForm = {
     experience: number,
     institute: string,
     password: string;
-    token: string;
     createdAt: string;
     expiresAt: string;
   };
@@ -40,6 +41,8 @@ export type LoginForm = {
   };
   
   export type UserCredential = {
+    authState: any;
+    educator_id: any;
     token: string;
     user: UserData;
   };
@@ -54,6 +57,36 @@ export type LoginForm = {
     setUserAuthInfo: (data: UserCredential) => void;
     isUserAuthenticated: () => boolean;
   };
+
+  export type Course = {
+    map(arg0: (chapter: any) => import("react").JSX.Element): ReactNode;
+    description: ReactNode;
+    price: ReactNode;
+    title: ReactNode;
+    chapter_id: Key | null | undefined;
+    course_title: string,
+    course_description: string,
+    course_price: number,
+    name: string,
+    institute: string,
+    experience: number,
+    role: string,
+    email: string,
+  }
+
+  export type course = {
+    id: number,
+    title: string,
+    description: string,
+    price: number,
+    imageUrl: string,
+    name: string,
+    institute: string,
+    experience: number,
+    role: string,
+    email: string,
+    chapters: [],
+  }
 
   // export type EducatorAuthContextType = {
   //   authState: EducatorCredential;

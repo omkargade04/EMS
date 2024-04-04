@@ -35,7 +35,7 @@ const page = () => {
   const [userData, setUserData] = useState<LoginForm>({
     email: "",
     role: "",
-    password: ""
+    password: "",
   });
 
   const handleSubmit = async () => {
@@ -43,8 +43,8 @@ const page = () => {
     const role = userData.role;
     const password = userData.password;
 
-    console.log("User email: ",email);
-    console.log("User password: ",password);
+    console.log("User email: ", email);
+    console.log("User password: ", password);
 
     if (!email || !password) {
       toast.error("All fields required");
@@ -53,7 +53,7 @@ const page = () => {
 
     try {
       const response = await login(email, role, password);
-      console.log("This is reposne: ",response)
+      console.log("This is reposne: ", response);
       setUserAuthInfo(response);
       toast.success(response.message);
       router.push("/");
@@ -63,7 +63,6 @@ const page = () => {
     }
   };
 
-
   return (
     <main className="bg-[#5865F2] flex justify-center items-center h-screen">
       <Card className="w-3/4 sm:w-1/2 p-2 lg:p-8 rounded-xl bg-[#3f4146] text-white border border-[#313338] flex justify-center items-center">
@@ -71,8 +70,7 @@ const page = () => {
           <CardHeader className="lg:mb-5 flex justify-center items-center ">
             <CardTitle className="mb-2">Login</CardTitle>
             <CardDescription className="text-sm text-center">
-              Welcome back to{" "}
-              <span className="text-[#7c87ff]">Website</span>!
+              Welcome back to <span className="text-[#7c87ff]">Website</span>!
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -130,18 +128,18 @@ const page = () => {
               Login
             </Button>
             <div className="flex-col">
-            <p className="text-xs m-2">
-              Dont have an student account?{" "}
-              <span className="text-[#7c87ff]">
-                <Link href="/student/register">Register Here</Link>
-              </span>
-            </p>
-            <p className="text-xs">
-              Dont have an educator account?{" "}
-              <span className="text-[#7c87ff]">
-                <Link href="/educator/register">Register Here</Link>
-              </span>
-            </p>
+              <p className="text-xs m-2">
+                Dont have an student account?{" "}
+                <span className="text-[#7c87ff]">
+                  <Link href="/student/register">Register Here</Link>
+                </span>
+              </p>
+              <p className="text-xs">
+                Dont have an educator account?{" "}
+                <span className="text-[#7c87ff]">
+                  <Link href="/educator/register">Register Here</Link>
+                </span>
+              </p>
             </div>
           </CardFooter>
         </div>

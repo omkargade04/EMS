@@ -17,6 +17,8 @@ export const isUserAuthenticated = async (
     const token = authHeader ? authHeader.replace('Bearer ', '') : null;
     const value: any[] = [token];
     const data: QueryResult<any> = await client.query(query, value);
+
+    console.log(authHeader);
     
     if (data.rowCount === null) {
       return res.json({ status: false, message: "No user" });
