@@ -5,13 +5,9 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  CardContent,
-  CardFooter,
-  Card,
-} from "@/components/ui/card";
+import { CardContent, CardFooter, Card } from "@/components/ui/card";
 import { useAuth } from "@/app/context/Auth";
-import Eduimg1 from "@/public/images/course-image.png"
+import Eduimg1 from "@/public/images/course-image.png";
 import { useRouter } from "next/navigation";
 import { baseURL } from "@/app/api/api";
 
@@ -33,7 +29,7 @@ const Page = () => {
 
   useEffect(() => {
     getCourses();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]); // Reload courses when currentPage changes
 
   const getCourses = async () => {
@@ -58,7 +54,10 @@ const Page = () => {
           Courses
         </h1>
         {role === "Educator" && (
-          <Link href="/create-course" className="flex justify-center items-center m-4">
+          <Link
+            href="/create-course"
+            className="flex justify-center items-center m-4"
+          >
             <Button className="flex justify-end items-center rounded-xl">
               + Create New Course
             </Button>
@@ -76,8 +75,10 @@ const Page = () => {
                   <p className="text-sm leading-none text-gray-500 dark:text-gray-400">
                     {course.description}
                   </p>
-                  <p className="text-sm leading-none">Educator: Prof. {course.name}</p>
-                  <p className="text-2xl font-semibold">${course.price}</p>
+                  <p className="text-sm leading-none">
+                    Educator: Prof. {course.name}
+                  </p>
+                  <p className="text-2xl font-semibold">Rs.{course.price}</p>
                 </CardContent>
                 <Image src={Eduimg1} height={100} width={400} alt="image" />
               </div>

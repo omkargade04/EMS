@@ -64,7 +64,7 @@ const Page = () => {
                   <p className="text-sm m-2 leading-none text-gray-500 dark:text-gray-400">
                     {course.description}
                   </p>
-                  <p className="text-2xl font-semibold">${course.price}</p>
+                  <p className="text-2xl font-semibold">Rs.{course.price}</p>
                 </CardContent>
                 <Image src={Eduimg1} height={100} width={400} alt="image" />
               </div>
@@ -84,7 +84,7 @@ const Page = () => {
         ))}
 
       {/* Pagination */}
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center m-4">
         <Button
           onClick={() => paginate(currentPage - 1)} // Go to previous page
           className="mx-1"
