@@ -20,13 +20,6 @@ export default function Home() {
 
   return (
     <main className="px-4 sm:px-6 lg:px-8">
-      {/* <Image 
-        alt="Hero"
-        className="aspect-[1] object-cover object-center bg-transparent"
-        height={100}
-        src={Stripeimg1}
-        width={2000}
-      /> */}
       <div className="relative max-w-7xl w-full mx-auto overflow-hidden rounded-t-lg">
         <Image
           alt="Hero"
@@ -37,13 +30,36 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-[rgba(255,255,255,0.75)] backdrop-blur flex items-center justify-center p-4">
           <div className="grid gap-4 text-center">
-            <h1 className="text-6xl font-bold text-[#2a4185] tracking-tighter sm:text-8xl ">
+            <h1 className="text-6xl font-bold text-[#2a4185] transform hover:scale-110 transition-transform duration-300 tracking-tighter sm:text-8xl ">
               WELCOME TO ACADEMIA
             </h1>
             <p className="mx-auto max-w-2xl text-gray-500 md:text-xl/relaxed dark:text-gray-400">
               Introduce your child to the world of programming with our fun and
-              interactive coding courses designed for kids aged 8-12.
+              interactive coding courses designed for kids of all ages.
             </p>
+            {!isUserAuthenticated() && (
+              <div className=" m-7 flex justify-center items-center">
+                <h2 className="text-5xl flex justify-center items-center text-[#2a4185]">
+                  Register Below
+                </h2>
+              </div>
+            )}
+            <div className="flex justify-center items-center m-4">
+              {!isUserAuthenticated() && (
+                <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                  <Link href="/student/register">
+                    <Button className="bg-[#eb5f9e] p-2 rounded-md text-white hover:bg-[#d04370]">
+                      Register as Student
+                    </Button>
+                  </Link>
+                  <Link href="/educator/register">
+                    <Button className="bg-[#eb5f9e] p-2 rounded-md text-white hover:bg-[#d04370]">
+                      Register as Educator
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -172,7 +188,7 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="space-y-4 text-center">
             <div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              <h2 className="text-3xl text-[#eb5f9e] font-bold tracking-tighter sm:text-4xl md:text-5xl">
                 Frequently Asked Questions
               </h2>
             </div>
