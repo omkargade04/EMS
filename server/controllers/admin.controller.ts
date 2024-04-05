@@ -5,7 +5,7 @@ dotenv.config({ path: "./config.env" });
 import { generateAdminToken } from "../middlewares/admin.middleware";
 import bcrypt from "bcryptjs";
 import { client } from "../model/db";
-import { ReqMid } from "../types/user";
+import { ReqMid } from "../types/admin";
 import { QueryResult } from "pg";
 require("dotenv").config();
 
@@ -73,11 +73,12 @@ const signin = async (req: ReqMid, res: Response) => {
     const param = [name];
     const data: QueryResult<any> = await client.query(query, param);
     console.log(data.rows[0]);
-
-    if (data.rowCount === 1) {
+    console.log("admin token process")
+    if (data.rowCount !== 0) {
       const auth = await bcrypt.compare(password, data.rows[0].password);
       if (auth) {
         const token = await generateAdminToken(data.rows[0].admin_id);
+        console.log(token)
         const admin = data.rows[0];
         delete admin.password;
         return res.json({
@@ -125,8 +126,8 @@ const verifyingEducator = async(req: any, res: any) => {
     console.log("This is educator: ", educator);
 
     const timestamp = new Date().toISOString();
-    const insertQuery: string = `INSERT INTO educators(name, email, password, created_at, updated_at) VALUES($1, $2, $3, $4, $5)`;
-    const insertParams: any[] = [educator.name, educator.email, educator.password, timestamp, timestamp];
+    const insertQuery: string = `INSERT INTO educators(name, email, password, institute, experience, created_at, updated_at) VALUES($1, $2, $3, $4, $5)`;
+    const insertParams: any[] = [educator.name, educator.email, educator.password, educator.institute, educator.experience, timestamp, timestamp];
     const insertData: QueryResult<any> = await client.query(insertQuery, insertParams);
 
     res
@@ -137,4 +138,45 @@ const verifyingEducator = async(req: any, res: any) => {
   }
 }
 
-module.exports = { signup, signin, eductorVrificatonInfo, verifyingEducator };
+const getAllStudents = async(req: any, res: any) => {
+  try{
+    const getQuery: string = `SELECT * FROM students`;
+    const result: QueryResult<any> = await client.query(getQuery);
+    res.status(200).json({status: true, data: result.rows, message: "All students retrieved"}); 
+  }catch(err: any){ 
+
+  }
+}
+
+const getAllEducators = async(req: any, res: any) => {
+  try{
+    const getQuery: string = `SELECT * FROM educators`;
+    const result: QueryResult<any> = await client.query(getQuery);
+    res.status(200).json({status: true, data: result.rows, message: "All educators retrieved"}); 
+  }catch(err: any){ 
+
+  }
+}
+
+const logout = async (req: ReqMid, res: any) => {
+  if (!req.token) {
+    return res.status(401).json({ error: "You are already logged out" });
+  }
+
+  const removeAdmin: string = "DELETE FROM admin_token WHERE token = $1";
+
+  const value: any[] = [req.token];
+
+  try {
+    const result: QueryResult<any> = await client.query(removeAdmin, value);
+
+    return res
+      .status(200)
+      .json({ success: "Admin logged out successfully!" });
+  } catch (err: any) {
+    return res
+      .status(500)
+      .json({ error: "An error occurred while logging out" });
+  }
+};
+module.exports = { signup, signin, getAllStudents, getAllEducators, eductorVrificatonInfo, verifyingEducator, logout };

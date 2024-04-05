@@ -47,43 +47,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row items-center justify-between transition-colors duration-500">
-        <div className="max-w-lg mr-16 mx-auto md:mx-0 md:pl-0">
-          <h2 className="text-7xl  md:text-7xl font-bold text-[#2a4185] mb-4 md:mb-6">
-            WELCOME TO ACADEMIA
-          </h2>
-          <p className="text-lg md:text-2xl font-bold text-[#eb5f9e] mb-3">
-            Best Online Education Expertise
-          </p>
-          <p className="mb-6 md:pr-16">
-            Far far away, behind the word mountains, far from the countries
-            Vokalia and Consonantia, there live the blind texts.
-          </p>
-          {!isUserAuthenticated() && (
-            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-              <Link href="/student/register">
-                <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
-                  Register as Student
-                </Button>
-              </Link>
-              <Link href="/educator/register">
-                <Button className="bg-[#2a4185] p-2 rounded-md text-white hover:bg-[#151e39]">
-                  Register as Educator
-                </Button>
-              </Link>
-            </div>
-          )}
-        </div>
-        <div className="image-wrapper mt-6 md:mt-0 md:ml-8 overflow-hidden">
-          <Image
-            src={Eduimg1}
-            height={750}
-            width={750}
-            alt="edu-image"
-            className="object-contain"
-          ></Image>
-        </div>
-      </header> */}
 
       <h2 className="text-center text-3xl md:text-5xl font-semibold text-[#eb5f9e] pt-10">
         Our Learning Library

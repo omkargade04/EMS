@@ -64,13 +64,13 @@ const page = () => {
   };
 
   return (
-    <main className="bg-[#5865F2] flex justify-center items-center h-screen">
+    <main className="flex justify-center items-center h-screen">
       <Card className="w-3/4 sm:w-1/2 p-2 lg:p-8 rounded-xl bg-[#3f4146] text-white border border-[#313338] flex justify-center items-center">
         <div className="lg:border-r lg:border-r-[#aaafbc] lg:pr-8">
           <CardHeader className="lg:mb-5 flex justify-center items-center ">
             <CardTitle className="mb-2">Login</CardTitle>
             <CardDescription className="text-sm text-center">
-              Welcome back to <span className="text-[#7c87ff]">Website</span>!
+              Welcome back to <span className="text-[#eb5f9e]">Website</span>!
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -123,20 +123,20 @@ const page = () => {
           <CardFooter className="lg:mb-4 flex flex-col space-y-2 justify-center items-center">
             <Button
               onClick={handleSubmit}
-              className="w-full rounded-xl bg-[#5865F2] hover:bg-[#434fd0]"
+              className="w-full rounded-xl bg-[#eb5f9e] hover:bg-[#d04370]"
             >
               Login
             </Button>
             <div className="flex-col">
               <p className="text-xs m-2">
                 Dont have an student account?{" "}
-                <span className="text-[#7c87ff]">
-                  <Link href="/student/register">Register Here</Link>
+                <span className="text-[#eb5f9e]">
+                  <Link href="/student/register">Register</Link>
                 </span>
               </p>
               <p className="text-xs">
                 Dont have an educator account?{" "}
-                <span className="text-[#7c87ff]">
+                <span className="text-[#eb5f9e]">
                   <Link href="/educator/register">Register Here</Link>
                 </span>
               </p>
@@ -147,7 +147,7 @@ const page = () => {
           <div className="space-y-6 flex flex-col justify-center items-center">
             <div className="text-center flex flex-col justify-center items-center font-bold text-3xl ">
               {" "}
-              Explore<span className="text-[#7c87ff]">Courses!</span>
+              Explore<span className="text-[#eb5f9e]">Courses!</span>
             </div>
             <Image
               src={loginImage}

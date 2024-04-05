@@ -45,6 +45,30 @@ export const studentSignup = async (
 };
 
 
+export const adminSignup = async (
+  name: string,
+  password: string,
+) => {
+  try {
+    const response = await api.post(
+      `${baseURL}/v1/admin/signup`,
+      {
+        name: name,
+        password: password,
+      },
+      {
+        withCredentials: true, // Include credentials (cookies, HTTP authentication) with the request
+      }
+    );
+
+    console.log("response", response);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error adding student data");
+  }
+};
+
 //Login
 export const login = async (email: string, role: string, password: string) => {
     try {
@@ -58,6 +82,20 @@ export const login = async (email: string, role: string, password: string) => {
     } catch (err) {
       console.log("Error in logging in", err);
       throw new Error("Error fetching educator data");
+    }
+  };
+
+  export const adminLogin = async (name: string, password: string) => {
+    try {
+      const response = await api.post(`${baseURL}/v1/admin/signin`, {
+        name: name,
+        password: password,
+      });
+      console.log(response);
+      return response.data;
+    } catch (err) {
+      console.log("Error in logging in", err);
+      throw new Error("Error fetching Admin data");
     }
   };
   

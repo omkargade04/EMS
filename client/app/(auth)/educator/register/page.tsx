@@ -70,14 +70,14 @@ const page = () => {
   };
 
   return (
-    <main className="bg-[#5865F2] flex justify-center items-center h-screen">
+    <main className=" flex justify-center items-center h-screen">
       <Card className="p-10  rounded-xl bg-[#3f4146] text-white border border-[#313338] flex justify-center items-center">
         <div className="">
           <CardHeader className="mb-5 flex justify-center items-center ">
             <CardTitle className="mb-2">Educator Register</CardTitle>
             <CardDescription className="text-sm text-center">
               Create an Account to create{" "}
-              <span className="text-[#7c87ff]">courses</span>!
+              <span className="text-[#eb5f9e]">courses</span>!
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -179,13 +179,13 @@ const page = () => {
           <CardFooter className="flex flex-col space-y-4 justify-center items-center">
             <Button
               onClick={handleSubmit}
-              className="w-full mt-2 rounded-xl bg-[#5865F2] hover:bg-[#434fd0]"
+              className="w-full mt-2 rounded-xl bg-[#eb5f9e] hover:bg-[#d04370]"
             >
               Register
             </Button>
             <p className="text-xs">
               Already have an account?{" "}
-              <span className="text-[#7c87ff]">
+              <span className="text-[#eb5f9e]">
                 <Link href="/login">Login</Link>
               </span>
             </p>

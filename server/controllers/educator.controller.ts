@@ -72,7 +72,7 @@ const getMyCourses = async (req: ReqMid, res: any) => {
 };
 
 const educatorVerification = async(req: any, res: any) => {
-  const {name, email, password} = req.body;
+  const {name, email, password, institute, experience} = req.body;
   if (!name || !email || !password) {
     console.log("Fill all details", req.body);
     return res
@@ -82,9 +82,9 @@ const educatorVerification = async(req: any, res: any) => {
 
   try{
     const timestamp = new Date().toISOString();
-    const insertQuery: string = `INSERT INTO educator_verification(name, email, password, created_at, updated_at) VALUES($1, $2, $3, $4, $5)`;
+    const insertQuery: string = `INSERT INTO educator_verification(name, email, password, institute, experience, created_at, updated_at) VALUES($1, $2, $3, $4, $5)`;
     const hashPassword = await bcrypt.hash(password, 10);
-    const insertParams: any[] = [name, email, hashPassword, timestamp, timestamp];
+    const insertParams: any[] = [name, email, hashPassword, experience, institute, timestamp, timestamp];
     const insertData: QueryResult<any> = await client.query(insertQuery, insertParams);
 
     console.log(insertData.rows[0]);

@@ -5,6 +5,11 @@ export type LoginForm = {
     password: string;
     role: string;
   };
+
+  export type AdminLoginForm = {
+    password: string;
+    name: string;
+  };
   
   export type RegisterForm = {
     name: string;

@@ -37,7 +37,7 @@ export const isAdminAuthenticated = async (
 };
 export const generateAdminToken = async (admin_id: number) => {
   try {
-    console.log(admin_id);
+    console.log("this is admin id: ",admin_id);
     const timestamp = new Date();
     const key = process.env.TOKEN_SECRET || "default_secret_token";
     const token = jwt.sign({ id: admin_id }, key, { expiresIn: "24h" });
