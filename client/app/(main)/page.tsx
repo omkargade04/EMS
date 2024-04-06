@@ -23,10 +23,10 @@ export default function Home() {
       <div className="relative max-w-7xl w-full mx-auto overflow-hidden rounded-t-lg">
         <Image
           alt="Hero"
-          className="aspect-[1] flex justify-center items-center object-cover object-center"
+          className=""
           height={400}
           src={Eduimg1}
-          width={900}
+          width={1440}
         />
         <div className="absolute inset-0 bg-[rgba(255,255,255,0.75)] backdrop-blur flex items-center justify-center p-4">
           <div className="grid gap-4 text-center">
@@ -64,7 +64,7 @@ export default function Home() {
         </div>
       </div>
 
-      <h2 className="text-center text-3xl md:text-5xl font-semibold text-[#eb5f9e] pt-10">
+      <h2 className="text-center text-3xl md:text-5xl font-semibold transform hover:scale-110 transition-transform duration-300 tracking-tighter text-[#eb5f9e] pt-10">
         Our Learning Library
       </h2>
       <p className="text-center text-lg pt-7">
@@ -119,7 +119,7 @@ export default function Home() {
         </Card>
       </div>
 
-      <div className="text-center pt-9">
+      <div className="text-center pt-9 transform hover:scale-110 transition-transform duration-300 tracking-tighter">
         <h3>For more such fun courses click below to view more such content</h3>
         <div className="mt-6">
           <Link href="/courses">
@@ -128,7 +128,7 @@ export default function Home() {
         </div>
       </div>
 
-      <h2 className="text-center text-3xl md:text-5xl font-semibold text-[#eb5f9e] mt-20">
+      <h2 className="text-center text-3xl md:text-5xl font-semibold transform hover:scale-110 transition-transform duration-300 tracking-tighter text-[#eb5f9e] mt-20">
         Give their boundless potential unlimited access
       </h2>
 
@@ -188,7 +188,7 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="space-y-4 text-center">
             <div>
-              <h2 className="text-3xl text-[#eb5f9e] font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              <h2 className="text-3xl text-[#eb5f9e] font-bold transform hover:scale-110 transition-transform duration-300 tracking-tighter sm:text-4xl md:text-5xl">
                 Frequently Asked Questions
               </h2>
             </div>
