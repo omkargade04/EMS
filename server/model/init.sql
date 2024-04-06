@@ -66,7 +66,7 @@ create table course(
     id serial primary key,
     fk_educator int,
     title varchar(255),
-    description varchar(255),
+    description text,
     imageUrl varchar(255),
     price float,
     created_at timestamp default current_timestamp,
@@ -76,7 +76,7 @@ create table course(
 create table chapters(
     chapter_id serial primary key,
     title varchar(255),
-    description varchar(255),
+    description text,
     position int,
     isPublished boolean default false,
     isFree boolean default false

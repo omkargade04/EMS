@@ -51,13 +51,13 @@ const Page = () => {
         Your Courses
       </h1>
 
-      {courses.length > 0 &&
+      {courses &&
         courses.map((course) => (
           <div
             key={course.id}
             className="flex flex-col justify-center m-4 items-center gap-6 pt-2 md:gap-8"
           >
-            <Card>
+            <Card className="max-w-4xl">
               <div className="flex justify-evenly items-center">
                 <CardContent>
                   <h3 className="text-xl m-2 font-semibold">{course.title}</h3>
@@ -91,6 +91,9 @@ const Page = () => {
         >
           Previous
         </Button>
+        <div className="bg-slate-200 text-black rounded-sm">
+          <p className="m-2 mx-2">{currentPage}</p>
+          </div>
         <Button
           onClick={() => paginate(currentPage + 1)} // Go to next page
           className="mx-1 "

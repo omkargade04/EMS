@@ -47,6 +47,9 @@ const Page = () => {
     setCurrentPage(pageNumber);
   };
 
+  console.log(courses);
+  console.log(currentPage)
+
   return (
     <div className="p-4 md:p-6">
       <div className="max-w-6xl mx-auto">
@@ -63,39 +66,43 @@ const Page = () => {
             </Button>
           </Link>
         )}
-        {courses.map((course) => (
-          <div
-            className="flex flex-col justify-center m-4 items-center gap-6 pt-2 md:gap-8"
-            key={course.id}
-          >
-            <Card className="">
-              <div className="flex justify-evenly items-center">
-                <CardContent className="flex flex-col gap-2">
-                  <h3 className="text-xl font-semibold">{course.title}</h3>
-                  <p className="text-sm leading-none text-gray-500 dark:text-gray-400">
-                    {course.description}
-                  </p>
-                  <p className="text-sm leading-none">
-                    Educator: Prof. {course.name}
-                  </p>
-                  <p className="text-2xl font-semibold">Rs.{course.price}</p>
-                </CardContent>
-                <Image src={Eduimg1} height={100} width={400} alt="image" />
-              </div>
-              <CardFooter>
-                <Button
-                  size="lg"
-                  className="w-full"
-                  onClick={() => {
-                    router.push(`/courses/${course.id}`);
-                  }}
-                >
-                  Enroll
-                </Button>
-              </CardFooter>
-            </Card>
-          </div>
-        ))}
+        {courses ? (
+          courses.map((course) => (
+            <div
+              className="flex flex-col justify-center m-4 items-center gap-6 pt-2 md:gap-8"
+              key={course.id}
+            >
+              <Card className="max-w-4xl">
+                <div className="flex justify-evenly items-center">
+                  <CardContent className="flex flex-col gap-2">
+                    <h3 className="text-xl font-semibold">{course.title}</h3>
+                    <p className="text-sm leading-none text-gray-500 dark:text-gray-400">
+                      {course.description}
+                    </p>
+                    <p className="text-sm leading-none">
+                      Educator: Prof. {course.name}
+                    </p>
+                    <p className="text-2xl font-semibold">Rs.{course.price}</p>
+                  </CardContent>
+                  <Image src={Eduimg1} height={100} width={400} alt="image" />
+                </div>
+                <CardFooter>
+                  <Button
+                    size="lg"
+                    className="w-full"
+                    onClick={() => {
+                      router.push(`/courses/${course.id}`);
+                    }}
+                  >
+                    Enroll
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
+          ))
+        ) : (
+          <div>No courses available</div>
+        )}
         {/* Pagination */}
         <div className="flex justify-center mt-4">
           <Button
@@ -104,6 +111,9 @@ const Page = () => {
           >
             Previous
           </Button>
+          <div className="bg-slate-200 text-black rounded-sm">
+          <p className="m-2 mx-2">{currentPage}</p>
+          </div>
           <Button
             onClick={() => paginate(currentPage + 1)} // Go to next page
             className="mx-1 "
