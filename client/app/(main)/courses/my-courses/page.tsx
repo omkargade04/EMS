@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Eduimg1 from "@/public/images/course-image.png";
+import Link from "next/link";
 
 const Page = () => {
   const { authState } = useAuth();
@@ -50,6 +51,17 @@ const Page = () => {
       <h1 className="text-6xl font-bold flex justify-center items-center m-4 text-[#2a4185] tracking-tighter sm:text-6xl ">
         Your Courses
       </h1>
+
+      {role === "Educator" && (
+          <Link
+            href="/create-course"
+            className="flex justify-center items-center m-4"
+          >
+            <Button className="flex justify-end items-center rounded-xl">
+              + Create New Course
+            </Button>
+          </Link>
+        )}
 
       {courses &&
         courses.map((course) => (

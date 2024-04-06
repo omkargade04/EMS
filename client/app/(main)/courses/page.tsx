@@ -66,7 +66,7 @@ const Page = () => {
             </Button>
           </Link>
         )}
-        {courses ? (
+        {courses &&
           courses.map((course) => (
             <div
               className="flex flex-col justify-center m-4 items-center gap-6 pt-2 md:gap-8"
@@ -99,10 +99,7 @@ const Page = () => {
                 </CardFooter>
               </Card>
             </div>
-          ))
-        ) : (
-          <div>No courses available</div>
-        )}
+          ))}
         {/* Pagination */}
         <div className="flex justify-center mt-4">
           <Button
