@@ -32,7 +32,6 @@ const getAllCourses = async (req: any, res: any) => {
   }
 };
 
-
 const getACourse = async (req: any, res: any) => {
   const course_id = req.params.courseId;
   console.log(course_id);

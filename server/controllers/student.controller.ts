@@ -98,8 +98,9 @@ const courseCheckout = async (req: ReqMid, res: any) => {
       const stripeParams: any[] = [student_id, customer.id];
       await client.query(stripeQuery, stripeParams);
       console.log(customer.id);
-      const getCustomer: string = `SELECT * FROM stripeCustomer WHERE stripe_id=${customer.id}`;
-      stripeCustomer = await client.query(getCustomer);
+      const getCustomer: string = `SELECT * FROM stripeCustomer WHERE stripe_id=$1`;
+      const values: any[] = [customer.id];
+      stripeCustomer = await client.query(getCustomer, values);
     }
     console.log("Stripe Customer Data: ", stripeCustomer.rows[0]);
     const session = await stripe.checkout.sessions.create({

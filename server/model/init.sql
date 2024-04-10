@@ -1,12 +1,3 @@
--- create table users(
---     user_id serial primary key,
---     name varchar(255) not null,
---     email varchar(255) unique not null,
---     password varchar(255) unique not null,
---     created_at timestamp default current_timestamp,
---     updated_at timestamp default current_timestamp
--- );
-
 create table user_token(
     user_token_id serial primary key,
     token varchar not null,
@@ -79,11 +70,11 @@ create table chapters(
     description text,
     position int,
     isPublished boolean default false,
-    isFree boolean default false
+    isFree boolean default false,
     fk_course int,
     purchases varchar(255)[] default array[]::varchar(255)[],
     created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp
+    updated_at timestamp default current_timestamp,
     constraint fk_course foreign key(fk_course) references course(id) on delete cascade on update cascade
 );
 
