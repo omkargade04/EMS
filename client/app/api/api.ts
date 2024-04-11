@@ -1,5 +1,5 @@
 import axios from "axios";
-export const baseURL = "http://localhost:5000";
+export const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 // export const baseURL = `https://alumni-backend-q2j4.onrender.com`
 
 export default axios.create({
