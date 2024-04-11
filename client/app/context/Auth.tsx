@@ -1,7 +1,13 @@
 "use client";
 
 import { UserCredential, AuthContextType } from "@/type";
-import { useState, useEffect, useContext, createContext, ReactNode } from "react";
+import {
+  useState,
+  useEffect,
+  useContext,
+  createContext,
+  ReactNode,
+} from "react";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 const { Provider } = AuthContext;
@@ -15,7 +21,8 @@ const useAuth = (): AuthContextType => {
 };
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [authState, setUserAuthState] = useState<UserCredential>({
+  const [authState, setAuthState] = useState<UserCredential>({
+    educator_id: 0,
     token: "",
     user: {
       name: "",
@@ -30,26 +37,16 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
+    const educator_id = localStorage.getItem("educator_id");
     const token = localStorage.getItem("token");
-    const userString = localStorage.getItem("user");
-    if (userString) {
-      try {
-        const user = JSON.parse(userString);
-        setUserAuthState({ token: token || "", user });
-      } catch (error) {
-        console.error("Error parsing user data from localStorage:", error);
-      }
-    } else {
-      console.warn("No user data found in localStorage.");
-    }
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    setAuthState({ educator_id: educator_id, token: token || "", user });
   }, []);
-  
-  
 
   const setUserAuthInfo = (data: UserCredential) => {
-    localStorage.setItem("token", data.token!);
+    localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
-    setUserAuthState(data);
+    setAuthState(data);
   };
 
   const isUserAuthenticated = () => {

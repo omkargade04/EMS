@@ -46,7 +46,6 @@ export type LoginForm = {
   };
   
   export type UserCredential = {
-    authState: any;
     educator_id: any;
     token: string;
     user: UserData;
