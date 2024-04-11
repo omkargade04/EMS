@@ -14,8 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateUserToken = exports.isUserAuthenticated = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config({ path: "./config.env" });
+require('dotenv').config();
 const db_1 = require("../model/db");
 const isUserAuthenticated = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {

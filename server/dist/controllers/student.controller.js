@@ -8,16 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config({ path: "./config.env" });
+require('dotenv').config;
 const db_1 = require("../model/db");
 require("dotenv").config();
 const stripe_1 = require("../lib/stripe");
-
 const enrollForACourse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const course_id = req.params.id;
     const student_id = req.student.student_id;
@@ -95,8 +90,9 @@ const courseCheckout = (req, res) => __awaiter(void 0, void 0, void 0, function*
             const stripeParams = [student_id, customer.id];
             yield db_1.client.query(stripeQuery, stripeParams);
             console.log(customer.id);
-            const getCustomer = `SELECT * FROM stripeCustomer WHERE stripe_id=${customer.id}`;
-            stripeCustomer = yield db_1.client.query(getCustomer);
+            const getCustomer = `SELECT * FROM stripeCustomer WHERE stripe_id=$1`;
+            const values = [customer.id];
+            stripeCustomer = yield db_1.client.query(getCustomer, values);
         }
         console.log("Stripe Customer Data: ", stripeCustomer.rows[0]);
         const session = yield stripe_1.stripe.checkout.sessions.create({

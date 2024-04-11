@@ -12,8 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config({ path: "./config.env" });
+require('dotenv').config;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const db_1 = require("../model/db");
 const user_middleware_1 = require("../middlewares/user.middleware");
