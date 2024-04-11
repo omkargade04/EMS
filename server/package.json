@@ -7,7 +7,7 @@
     "start": "ts-node src/app.ts",
     "dev": "nodemon src/app.ts",
     "startDev": "nodemon dist/src/app.js",
-    "build": "node dist/src/app.js",
+    "build": "node src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
