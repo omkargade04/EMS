@@ -16,7 +16,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: "./config.env" });
 const db_1 = require("../model/db");
 require("dotenv").config();
-const {stripe_1} = require("../lib/stripe");
+const stripe_1 = require("../lib/stripe");
 
 const enrollForACourse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const course_id = req.params.id;
