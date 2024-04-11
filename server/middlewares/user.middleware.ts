@@ -1,8 +1,8 @@
 import { NextFunction } from "express";
 import { Request, Response } from 'express';
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-dotenv.config({ path: "./config.env" });
+require('dotenv').config();
+
 import { client } from "../model/db";
 import { QueryResult } from "pg";
 

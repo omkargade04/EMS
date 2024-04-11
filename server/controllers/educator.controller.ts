@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config({ path: "./config.env" });
+require('dotenv').config
+
 import bcrypt from "bcryptjs";
 import { client } from "../model/db";
 import { ReqMid } from "../types/educator";

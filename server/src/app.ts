@@ -1,7 +1,6 @@
 import express, { Request, Response, Application, urlencoded } from 'express';
-import dotenv from 'dotenv';
 import axios from 'axios';
-dotenv.config({ path: "./config.env" });
+require('dotenv').config();
 const cors = require('cors');
 const cron = require('node-cron')
 const studentRoutes = require('../router/student.routes');

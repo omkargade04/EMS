@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config({ path: "./config.env" });
+require('dotenv').config
+
 import { client } from "../model/db";
 import { ReqMid } from "../types/student";
 import { Query, QueryResult } from "pg";

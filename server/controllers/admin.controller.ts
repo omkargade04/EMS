@@ -1,7 +1,8 @@
 import express, { Request, Response, Application, urlencoded } from "express";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-dotenv.config({ path: "./config.env" });
+// import dotenv from "dotenv";
+require('dotenv').config
+// dotenv.config({ path: "./config.env" });
 import { generateAdminToken } from "../middlewares/admin.middleware";
 import bcrypt from "bcryptjs";
 import { client } from "../model/db";
