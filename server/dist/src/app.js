@@ -14,38 +14,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const axios_1 = __importDefault(require("axios"));
-require('dotenv').config();
-const cors = require('cors');
-const cron = require('node-cron');
-const studentRoutes = require('../router/student.routes');
-const educatorRoutes = require('../router/educator.routes');
-const courseRoutes = require('../router/course.routes');
-const adminRoutes = require('../router/admin.routes');
-const userRoutes = require('../router/user.routes');
+require("dotenv").config();
+const cors = require("cors");
+const cron = require("node-cron");
+const studentRoutes = require("../router/student.routes");
+const educatorRoutes = require("../router/educator.routes");
+const courseRoutes = require("../router/course.routes");
+const adminRoutes = require("../router/admin.routes");
+const userRoutes = require("../router/user.routes");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 const corsOptions = {
-    origin: ['http://localhost:3000'],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: [
+        "http://localhost:3000",
+        "https://ems-1aknn10h1-omkar-gades-projects.vercel.app",
+        "https://ems-one-gilt.vercel.app",
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
     optionsSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use('/v1/user', userRoutes);
-app.use('/v1/student', studentRoutes);
-app.use('/v1/educator', educatorRoutes);
+app.use("/v1/user", userRoutes);
+app.use("/v1/student", studentRoutes);
+app.use("/v1/educator", educatorRoutes);
 app.use("/v1/course", courseRoutes);
-app.use('/v1/admin', adminRoutes);
+app.use("/v1/admin", adminRoutes);
 const port = process.env.PORT;
-app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log("first");
         res.send("Hello");
     }
     catch (err) {
         console.log(err);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send("Internal Server Error");
     }
 }));
 app.listen(port, () => {
