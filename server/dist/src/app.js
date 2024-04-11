@@ -12,8 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const axios_1 = __importDefault(require("axios"));
+// const express_1 = __importDefault(require("express"));
+const express_1 = require('express');
+const axios_1 = require("axios");
 require('dotenv').config();
 const cors = require('cors');
 const cron = require('node-cron');
