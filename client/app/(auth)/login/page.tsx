@@ -64,7 +64,7 @@ const page = () => {
   };
 
   return (
-    <main className="flex justify-center items-center h-screen">
+    <main className="flex justify-center items-center h-screen bg-[#eb5f9e]">
       <Card className="w-3/4 sm:w-1/2 p-2 lg:p-8 rounded-xl bg-[#3f4146] text-white border border-[#313338] flex justify-center items-center">
         <div className="lg:border-r lg:border-r-[#aaafbc] lg:pr-8">
           <CardHeader className="lg:mb-5 flex justify-center items-center ">
