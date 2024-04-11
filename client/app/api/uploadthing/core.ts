@@ -8,7 +8,7 @@ const f = createUploadthing();
 const useAuthenticatedUser = () => {
   // Call useAuth within a custom hook
   const  authState  = useAuth();
-  return authState.authState; // Return the user object
+  return authState; // Return the user object
 };
 
 // FileRouter for your app, can contain multiple FileRoutes
@@ -19,21 +19,21 @@ export const ourFileRouter = {
     .middleware(() => {
       // Call the custom hook to get the authenticated user
       const user = useAuthenticatedUser();
-      return user ? user.authState?.fk_educator : null; // Access the educator_id from the user object
+      return user ? user.authState?.educator_id : null; // Access the educator_id from the user object
     })
     .onUploadComplete(() => {}),
   courseAttachment: f(["text", "image", "video", "audio", "pdf"])
     .middleware(() => {
       // Call the custom hook to get the authenticated user
       const user = useAuthenticatedUser();
-      return user ? user.authState?.fk_educator  : null; // Access the educator_id from the user object
+      return user ? user.authState?.educator_id  : null; // Access the educator_id from the user object
     })
     .onUploadComplete(() => {}),
   chapterVideo: f({ video: { maxFileCount: 1, maxFileSize: "512GB" } })
     .middleware(() => {
       // Call the custom hook to get the authenticated user
       const user = useAuthenticatedUser();
-      return user ? user.authState?.fk_educator  : null; // Access the educator_id from the user object
+      return user ? user.authState?.educator_id  : null; // Access the educator_id from the user object
     })
     .onUploadComplete(() => {}),
 } as FileRouter;
