@@ -52,7 +52,7 @@ app.get("/ping", (req, res) => {
   res.status(200).json("pong....");
 });
 
-const API_ENDPOINT = "https://community-backend-5z55.onrender.com";
+const API_ENDPOINT = "https://ems-q9s0.onrender.com";
 
 const makeApiRequest = async () => {
   try {
