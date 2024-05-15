@@ -3,7 +3,6 @@ import { Poppins } from "next/font/google";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/app/context/Auth";
 import "../globals.css";
-import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
 
 const inter = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
