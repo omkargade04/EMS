@@ -72,7 +72,7 @@ const Sidebar = () => {
       >
         <div className="border w-full p-4 flex flex-col justify-between items-center rounded-xl">
           {isUserAuthenticated() ? (
-            <div className="flex justify-center items-center gap-4">
+            <div className="flex flex-col sm:flex justify-center items-center gap-4">
               <div className="">{name}</div>
               <div className="text-pink-500 font-semibold ">{role}</div>
               <Button onClick={handleLogOut}>Logout</Button>

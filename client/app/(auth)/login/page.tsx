@@ -58,8 +58,8 @@ const page = () => {
       toast.success(response.message);
       router.push("/");
     } catch (err: any) {
-      toast.error(err.response.message);
-      console.log("Error", err);
+      toast.error(err.response.data.message);
+      console.log("Error", err.response.data.message);
     }
   };
 

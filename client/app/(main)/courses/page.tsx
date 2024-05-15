@@ -76,14 +76,20 @@ const Page = () => {
                   <CardContent className="flex flex-col gap-2">
                     <h3 className="text-xl font-semibold">{course.title}</h3>
                     <p className="text-sm leading-none text-gray-500 dark:text-gray-400">
-                      {String(course.description).slice(0,20)}
+                      {String(course.description).slice(0, 100)}....
                     </p>
                     <p className="text-sm leading-none">
                       Educator: Prof. {course.name}
                     </p>
                     <p className="text-2xl font-semibold">Rs.{course.price}</p>
                   </CardContent>
-                  <Image src={Eduimg1} height={100} width={400} alt="image" className="hidden sm:block"/>
+                  <Image
+                    src={Eduimg1}
+                    height={100}
+                    width={400}
+                    alt="image"
+                    className="hidden sm:block"
+                  />
                 </div>
                 <CardFooter>
                   <Button

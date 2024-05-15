@@ -53,15 +53,15 @@ const Page = () => {
       </h1>
 
       {role === "Educator" && (
-          <Link
-            href="/create-course"
-            className="flex justify-center items-center m-4"
-          >
-            <Button className="flex justify-end items-center rounded-xl">
-              + Create New Course
-            </Button>
-          </Link>
-        )}
+        <Link
+          href="/create-course"
+          className="flex justify-center items-center m-4"
+        >
+          <Button className="flex justify-end items-center rounded-xl">
+            + Create New Course
+          </Button>
+        </Link>
+      )}
 
       {courses &&
         courses.map((course) => (
@@ -74,11 +74,17 @@ const Page = () => {
                 <CardContent>
                   <h3 className="text-xl m-2 font-semibold">{course.title}</h3>
                   <p className="text-sm m-2 leading-none text-gray-500 dark:text-gray-400">
-                    {String(course.description).slice(0,50)}
+                    {String(course.description).slice(0, 100)}....
                   </p>
                   <p className="text-2xl font-semibold">Rs.{course.price}</p>
                 </CardContent>
-                <Image src={Eduimg1} height={100} width={400} alt="image" className="hidden sm:block"/>
+                <Image
+                  src={Eduimg1}
+                  height={100}
+                  width={400}
+                  alt="image"
+                  className="hidden sm:block"
+                />
               </div>
               <CardFooter>
                 <Button
@@ -105,7 +111,7 @@ const Page = () => {
         </Button>
         <div className="bg-slate-200 text-black rounded-sm">
           <p className="m-2 mx-2">{currentPage}</p>
-          </div>
+        </div>
         <Button
           onClick={() => paginate(currentPage + 1)} // Go to next page
           className="mx-1 "
