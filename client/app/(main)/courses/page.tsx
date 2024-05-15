@@ -22,11 +22,11 @@ interface Course {
 const Page = () => {
   const router = useRouter();
   const [courses, setCourses] = useState<Course[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3); // Number of items per page
   const { authState } = useAuth();
   const role = authState.user.role;
 
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     getCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,18 +42,17 @@ const Page = () => {
       console.log("Error: ", err);
     }
   };
-
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
 
   console.log(courses);
-  console.log(currentPage)
+  console.log(currentPage);
 
   return (
     <div className="p-4 md:p-6">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-6xl font-bold flex justify-center items-center m-4 text-[#2a4185] tracking-tighter sm:text-6xl ">
+        <h1 className="text-3xl sm:text-4xl  font-bold flex justify-center items-center m-4 text-[#2a4185] tracking-tighter ">
           Courses
         </h1>
         {role === "Educator" && (
@@ -109,7 +108,7 @@ const Page = () => {
             Previous
           </Button>
           <div className="bg-slate-200 text-black rounded-sm">
-          <p className="m-2 mx-2">{currentPage}</p>
+            <p className="m-2 mx-2">{currentPage}</p>
           </div>
           <Button
             onClick={() => paginate(currentPage + 1)} // Go to next page

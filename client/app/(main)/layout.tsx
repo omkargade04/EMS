@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import { AuthProvider } from "@/app/context/Auth";
 import "../globals.css";
 import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/layout/Sidebar";
 
 const inter = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -20,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="">
+        <div className="flex">
           <AuthProvider>
-              <Navbar />
-              {children}
+            <div className="flex border-r shadow-xl max-w-xs   min-h-screen overflow-y-auto md:min-w-[20rem]">
+              <Sidebar />
+            </div>
+            {children}
           </AuthProvider>
           <Toaster
             position="top-right"

@@ -48,7 +48,7 @@ const Page = () => {
   console.log(courses);
   return (
     <div>
-      <h1 className="text-6xl font-bold flex justify-center items-center m-4 text-[#2a4185] tracking-tighter sm:text-6xl ">
+      <h1 className="text-3xl sm:text-4xl font-bold flex justify-center items-center m-4 text-[#2a4185] tracking-tighter  ">
         Your Courses
       </h1>
 

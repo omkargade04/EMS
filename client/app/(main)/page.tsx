@@ -20,26 +20,29 @@ export default function Home() {
 
   return (
     <main className="px-4 sm:px-6 lg:px-8">
-      <div className="relative max-w-7xl w-full mx-auto overflow-hidden rounded-t-lg">
-        <Image
-          alt="Hero"
-          className=""
-          height={400}
-          src={Eduimg1}
-          width={1440}
-        />
-        <div className="absolute inset-0 bg-[rgba(255,255,255,0.75)] backdrop-blur flex items-center justify-center p-4">
+      <div className="sm:relative max-w-7xl w-full mx-auto overflow-hidden rounded-t-lg">
+        <div className="">
+          <Image
+            alt="Hero"
+            height={400}
+            src={Eduimg1}
+            width={1440}
+            className="hidden sm:block"
+          />
+        </div>
+
+        <div className="sm:absolute inset-0 bg-[rgba(255,255,255,0.75)] backdrop-blur flex items-center justify-center p-4">
           <div className="grid gap-4 text-center">
-            <h1 className="text-6xl font-bold text-[#2a4185] transform hover:scale-110 transition-transform duration-300 tracking-tighter sm:text-8xl ">
+            <h1 className="text-2xl font-bold text-[#2a4185] transform hover:scale-110 transition-transform duration-300 tracking-tighter sm:text-5xl ">
               WELCOME TO ACADEMIA
             </h1>
-            <p className="mx-auto max-w-2xl text-gray-500 md:text-xl/relaxed dark:text-gray-400">
+            <p className="mx-auto max-w-2xl text-gray-500 md:text-md/relaxed dark:text-gray-400">
               Introduce your child to the world of programming with our fun and
               interactive coding courses designed for kids of all ages.
             </p>
             {!isUserAuthenticated() && (
               <div className=" m-7 flex justify-center items-center">
-                <h2 className="text-5xl flex justify-center items-center text-[#2a4185]">
+                <h2 className="text-2xl sm:text-3xl flex justify-center items-center text-[#2a4185]">
                   Register Below
                 </h2>
               </div>
@@ -64,7 +67,7 @@ export default function Home() {
         </div>
       </div>
 
-      <h2 className="text-center text-3xl md:text-5xl font-semibold transform hover:scale-110 transition-transform duration-300 tracking-tighter text-[#eb5f9e] pt-10">
+      <h2 className="text-center text-3xl md:text-4xl font-semibold transform hover:scale-110 transition-transform duration-300 tracking-tighter text-[#eb5f9e] pt-10">
         Our Learning Library
       </h2>
       <p className="text-center text-lg pt-7">
@@ -128,7 +131,7 @@ export default function Home() {
         </div>
       </div>
 
-      <h2 className="text-center text-3xl md:text-5xl font-semibold transform hover:scale-110 transition-transform duration-300 tracking-tighter text-[#eb5f9e] mt-20">
+      <h2 className="text-center text-3xl md:text-4xl font-semibold transform hover:scale-110 transition-transform duration-300 tracking-tighter text-[#eb5f9e] mt-20">
         Give their boundless potential unlimited access
       </h2>
 
@@ -166,7 +169,7 @@ export default function Home() {
           </Card>
         </div>
         <div className="w-full md:w-2/3 px-4 md:px-0">
-          <p className="text-lg md:text-xl text-[#2a4185] mb-8">
+          <p className="text-sm md:text-xl text-[#2a4185] mb-8">
             Embark on an enriching learning journey with our Premium Plan,
             offering unlimited access to a vast array of educational courses
             tailored to suit your interests and goals. Dive deep into diverse
@@ -188,12 +191,12 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="space-y-4 text-center">
             <div>
-              <h2 className="text-3xl text-[#eb5f9e] font-bold transform hover:scale-110 transition-transform duration-300 tracking-tighter sm:text-4xl md:text-5xl">
+              <h2 className="text-3xl text-[#eb5f9e] font-bold transform hover:scale-110 transition-transform duration-300 tracking-tighter sm:text-4xl">
                 Frequently Asked Questions
               </h2>
             </div>
             <div>
-              <p className="text-base">
+              <p className="text-base pb-5">
                 Have a question? Check out our FAQ for the answer.
               </p>
             </div>
@@ -201,11 +204,11 @@ export default function Home() {
           <div className="grid gap-4 md:gap-6 lg:gap-8">
             <div className="border-t border-b py-4">
               <details className="border-b pb-4">
-                <summary className="flex items-center gap-2 text-lg font-medium">
+                <summary className="flex items-center gap-2 text-sm sm:text-xl font-medium">
                   How does the subscription model work?
                 </summary>
                 <div className="pt-4 space-y-4 text-base leading-loose text-gray-500 dark:text-gray-400">
-                  <p className="text-gray-500 dark:text-gray-400">
+                  <p className="text-gray-500 text-sm sm:text-xl dark:text-gray-400">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   </p>
                 </div>
@@ -213,11 +216,11 @@ export default function Home() {
             </div>
             <div className="border-t border-b py-4">
               <details className="border-b pb-4">
-                <summary className="flex items-center gap-2 text-lg font-medium">
+                <summary className="flex items-center gap-2 text-sm sm:text-xl font-medium">
                   Can I access course materials after my subscription ends?
                 </summary>
                 <div className="pt-4 space-y-4 text-base leading-loose text-gray-500 dark:text-gray-400">
-                  <p className="text-gray-500 dark:text-gray-400">
+                  <p className="text-gray-500 text-sm sm:text-xl dark:text-gray-400">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   </p>
                 </div>
@@ -225,11 +228,11 @@ export default function Home() {
             </div>
             <div className="border-t border-b py-4">
               <details className="border-b pb-4">
-                <summary className="flex items-center gap-2 text-lg font-medium">
+                <summary className="flex items-center gap-2 text-sm sm:text-xl font-medium">
                   Are the courses accredited?
                 </summary>
                 <div className="pt-4 space-y-4 text-base leading-loose text-gray-500 dark:text-gray-400">
-                  <p className="text-gray-500 dark:text-gray-400">
+                  <p className="text-gray-500 text-sm sm:text-xl dark:text-gray-400">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   </p>
                 </div>
@@ -237,11 +240,11 @@ export default function Home() {
             </div>
             <div className="border-t border-b py-4">
               <details className="border-b pb-4">
-                <summary className="flex items-center gap-2 text-lg font-medium">
+                <summary className="flex items-center gap-2 text-sm sm:text-xl font-medium">
                   How can I reset my password?
                 </summary>
                 <div className="pt-4 space-y-4 text-base leading-loose text-gray-500 dark:text-gray-400">
-                  <p className="text-gray-500 dark:text-gray-400">
+                  <p className="text-gray-500 text-sm sm:text-xl dark:text-gray-400">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   </p>
                 </div>
@@ -249,11 +252,11 @@ export default function Home() {
             </div>
             <div className="border-t border-b py-4">
               <details className="border-b pb-4">
-                <summary className="flex items-center gap-2 text-lg font-medium">
+                <summary className="flex items-center gap-2 text-sm sm:text-xl font-medium">
                   Can I enroll in multiple courses at the same time?
                 </summary>
                 <div className="pt-4 space-y-4 text-base leading-loose text-gray-500 dark:text-gray-400">
-                  <p className="text-gray-500 dark:text-gray-400">
+                  <p className="text-gray-500 text-sm sm:text-xl dark:text-gray-400">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   </p>
                 </div>
