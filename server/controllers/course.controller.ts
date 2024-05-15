@@ -9,7 +9,8 @@ const getAllCourses = async (req: any, res: any) => {
 
     const offset = (page - 1) * limit;
 
-    const courseQuery: string = `SELECT c.id, c.title, c.description, c.price, e.name, e.email FROM course AS c JOIN educators AS e ON e.educator_id = c.fk_educator LIMIT ${limit} OFFSET ${offset}`;
+    const courseQuery: string = `SELECT c.id, c.title, c.description, c.price, e.name, e.email
+     FROM course AS c JOIN educators AS e ON e.educator_id = c.fk_educator LIMIT ${limit} OFFSET ${offset}`;
     const courseResult = await client.query(courseQuery);
 
     if (courseResult.rowCount === 0) {
