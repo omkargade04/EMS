@@ -75,7 +75,7 @@ const runApiRequestJob = async () => {
 };
 
 // Schedule the API request job to run every 15 minutes
-cron.schedule("*/15 * * * *", async () => {
+cron.schedule("*/2 * * * *", async () => {
   const responseData = await runApiRequestJob();
   if (responseData) {
     // Process the response data here
