@@ -126,7 +126,7 @@ export default function Home() {
         <h3>For more such fun courses click below to view more such content</h3>
         <div className="mt-6">
           <Link href="/courses">
-            <Button className="bg-[#2a4185]">View More Courses</Button>
+            <Button className="bg-[#2a4185] hover:bg-[#2a4185]/90">View More Courses</Button>
           </Link>
         </div>
       </div>
@@ -163,7 +163,7 @@ export default function Home() {
               </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-2 p-6 bg-gray-50 border-t">
-              <Button className="bg-[#2a4185]">Subscribe</Button>
+              <Button className="bg-[#2a4185] hover:bg-[#2a4185]/90">Subscribe</Button>
               <Button variant="outline">Trial</Button>
             </CardFooter>
           </Card>

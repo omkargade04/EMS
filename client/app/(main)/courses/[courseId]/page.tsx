@@ -92,11 +92,10 @@ const Page = () => {
   return (
     //----------------------------------------------------------------------------
     <div className="bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-50">
-      
       <div className="container grid gap-12 px-4 py-8 md:grid-cols-2 md:py-12 lg:px-6">
         {course && (
           <div className="flex flex-col gap-2">
-            <h2 className="text-3xl font-bold tracking-tighter">
+            <h2 className="text-3xl text-[#2a4185] font-bold tracking-tighter">
               Introduction to {course.title}
             </h2>
             <p className="text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
@@ -104,11 +103,15 @@ const Page = () => {
             </p>
             <div className="flex items-center gap-4 md:gap-8">
               <div className="flex flex-col gap-1">
-                <span className="text-xl font-semibold">Instructor</span>
+                <span className="text-xl font-semibold text-[#2a4185]">
+                  Instructor
+                </span>
                 <span>Prof. {course.name}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-xl font-semibold">Price</span>
+                <span className="text-xl font-semibold text-[#2a4185]">
+                  Price
+                </span>
                 <span>Rs. {course.price}</span>
               </div>
             </div>
@@ -120,7 +123,7 @@ const Page = () => {
                   </h2>
                   <div className="relative flex justify-center items-center">
                     <button
-                      className="bg-black text-white text-xl flex items-center justify-center border border-white rounded-md hover:cursor-pointer py-2 px-4"
+                      className=" text-white text-xl flex items-center justify-center border bg-[#2a4185] hover:bg-[#2a4185]/90 border-white rounded-md hover:cursor-pointer py-2 px-4"
                       onClick={() => {
                         const chapterDropdown =
                           document.getElementById("chapterDropdown");
@@ -139,7 +142,7 @@ const Page = () => {
                         {chapter.map((chapter) => (
                           <li
                             key={chapter.chapter_id}
-                            className="hover:bg-black hover:text-white cursor-pointer my-1 px-4 py-2 rounded"
+                            className="hover:bg-[#2a4185] hover:text-white cursor-pointer my-1 px-4 py-2 rounded"
                             onClick={() => {
                               const chapterDropdown =
                                 document.getElementById("chapterDropdown");
@@ -170,17 +173,15 @@ const Page = () => {
                 src={Eduimg1}
                 width="400"
               />
-              <CardHeader className="p-4">
+              <CardHeader className="p-4 text-[#2a4185]">
                 <CardTitle>Introduction to {course.title}</CardTitle>
-                <div>
-                  Description: {course.description}
-                </div>
+                <div>Description: {course.description}</div>
               </CardHeader>
             </Card>
             <div className="flex flex-col gap-2 md:gap-4">
               <Button
                 size="lg"
-                className="text-xl"
+                className="text-xl bg-[#2a4185] hover:bg-[#2a4185]/90"
                 onClick={onClick}
                 disabled={isLoading}
               >

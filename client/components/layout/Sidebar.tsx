@@ -75,11 +75,11 @@ const Sidebar = () => {
             <div className="flex flex-col sm:flex justify-center items-center gap-4">
               <div className="">{name}</div>
               <div className="text-pink-500 font-semibold ">{role}</div>
-              <Button onClick={handleLogOut}>Logout</Button>
+              <Button onClick={handleLogOut} className="bg-[#2a4185] hover:bg-[#2a4185]/90">Logout</Button>
             </div>
           ) : (
             <Link
-              className="font-medium inline-flex h-9 items-center rounded-md hover:bg-black hover:text-white px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+              className="font-medium inline-flex h-9 items-center text-[#2a4185] rounded-md hover:bg-[#2a4185] hover:text-white px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
               href="/login"
             >
               Login
@@ -89,35 +89,35 @@ const Sidebar = () => {
         <div className="flex flex-col justify-center space-y-8 text-xl font-semibold  items-center pt-10">
           <Link className="flex" href="#">
             <FlagIcon className="h-6 w-6" />
-            <span className="text-black">Logo</span>
+            <span className="text-[#2a4185]">Logo</span>
           </Link>
           <div className="flex flex-col space-y-2">
             <Link
-              className="font-medium inline-flex h-9 items-center rounded-md hover:bg-black hover:text-white px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+              className="font-medium inline-flex h-9 items-center text-[#2a4185] rounded-md hover:bg-[#2a4185] hover:text-white px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
               href="/"
             >
               Home
             </Link>
             <Link
-              className="font-medium inline-flex h-9 items-center rounded-md hover:bg-black hover:text-white  px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+              className="font-medium inline-flex h-9 items-center text-[#2a4185]  rounded-md hover:bg-[#2a4185] hover:text-white  px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
               href="/courses"
             >
               Courses
             </Link>
             <Link
-              className="font-medium inline-flex h-9 items-center rounded-md hover:bg-black hover:text-white  px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+              className="font-medium inline-flex h-9 items-center text-[#2a4185] rounded-md hover:bg-[#2a4185] hover:text-white  px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
               href="/courses/my-courses"
             >
               My Courses
             </Link>
             <Link
-              className="font-medium inline-flex h-9 items-center rounded-md hover:bg-black hover:text-white  px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+              className="font-medium inline-flex h-9 items-center text-[#2a4185] rounded-md hover:bg-[#2a4185] hover:text-white  px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
               href="/courses"
             >
               Subscriptions
             </Link>
             <Link
-              className="font-medium inline-flex h-9 items-center rounded-md hover:bg-black hover:text-white px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
+              className="font-medium inline-flex h-9 items-center text-[#2a4185] rounded-md hover:bg-[#2a4185] hover:text-white px-4 py-2 transition-colors dark:hover:bg-gray-800 dark:hover:text-gray-50"
               href="#"
             >
               About

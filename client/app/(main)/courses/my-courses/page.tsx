@@ -8,6 +8,7 @@ import { useAuth } from "@/app/context/Auth";
 import { CardContent, CardFooter, Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { Pagination, PaginationContent } from "@/components/ui/pagination";
 import Image from "next/image";
 import Eduimg1 from "@/public/images/course-image.png";
 import Link from "next/link";
@@ -44,7 +45,10 @@ const Page = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authState, currentPage]); // Reload courses when authState or currentPage changes
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const handlePaginationClick = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
   console.log(courses);
   return (
     <div>
@@ -57,7 +61,7 @@ const Page = () => {
           href="/create-course"
           className="flex justify-center items-center m-4"
         >
-          <Button className="flex justify-end items-center rounded-xl">
+          <Button className="flex justify-end items-center rounded-xl bg-[#2a4185]">
             + Create New Course
           </Button>
         </Link>
@@ -89,7 +93,7 @@ const Page = () => {
               <CardFooter>
                 <Button
                   size="lg"
-                  className="w-full"
+                  className="w-full bg-[#2a4185] hover:bg-[#2a4185]/90"
                   onClick={() => {
                     router.push(`/courses/${course.id}`);
                   }}
@@ -101,24 +105,27 @@ const Page = () => {
           </div>
         ))}
 
-      {/* Pagination */}
-      <div className="flex justify-center m-4">
+      <Pagination>
         <Button
-          onClick={() => paginate(currentPage - 1)} // Go to previous page
-          className="mx-1"
+          disabled={currentPage === 1}
+          className="text-md sm:text-lg text-[#fff] bg-[#2a4185] hover:bg-[#2a4185]/90"
+          onClick={() => handlePaginationClick(currentPage - 1)}
         >
           Previous
         </Button>
-        <div className="bg-slate-200 text-black rounded-sm">
-          <p className="m-2 mx-2">{currentPage}</p>
-        </div>
+
+        <PaginationContent className="text-black px-2">
+          {currentPage}
+        </PaginationContent>
+
         <Button
-          onClick={() => paginate(currentPage + 1)} // Go to next page
-          className="mx-1 "
+          disabled={courses.length < 2}
+          className="text-md sm:text-lg text-[#fff] bg-[#2a4185] hover:bg-[#2a4185]/90"
+          onClick={() => handlePaginationClick(currentPage + 1)}
         >
           Next
         </Button>
-      </div>
+      </Pagination>
     </div>
   );
 };
