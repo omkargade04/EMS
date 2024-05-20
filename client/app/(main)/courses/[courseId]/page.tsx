@@ -100,11 +100,6 @@ const Page = () => {
               Introduction to {course.title}
             </h2>
             <p className="text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Let your child&apos;s creativity shine with this introductory
-              course to Scratch, a block-based visual programming language
-              created for young learners. They&apos;ll learn to make their own
-              interactive stories, games, and animations while gaining essential
-              computational thinking skills in a fun and supportive environment.
               Description: {course.description}
             </p>
             <div className="flex items-center gap-4 md:gap-8">
@@ -178,8 +173,7 @@ const Page = () => {
               <CardHeader className="p-4">
                 <CardTitle>Introduction to {course.title}</CardTitle>
                 <div>
-                  Let your child&apos;s creativity shine with this introductory
-                  course to Scratch. description: {course.description}
+                  Description: {course.description}
                 </div>
               </CardHeader>
             </Card>
