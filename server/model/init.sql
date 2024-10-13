@@ -33,13 +33,8 @@ create table educators(
 
 create table educator_verification(
     verification_id serial primary key,
-    name varchar(255) not null,
-    email varchar(255) unique not null,
-    password varchar(255) unique not null,
-    institute varchar(255) not null,
-    experience int,
-    created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp
+    fk_educator_id int,
+    constraint fk_educator_id foreign key(fk_educator_id) references educators(educator_id) on delete cascade on update cascade
 );
 
 create table courses(
@@ -53,16 +48,16 @@ create table courses(
     constraint fk_educator foreign key(fk_educator) references educators(educator_id) on delete cascade on update cascade
 );
 
-create table course(
-    id serial primary key,
-    fk_educator int,
-    title varchar(255),
-    description text,
-    imageUrl varchar(255),
-    price float,
-    created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp
-);
+-- create table course(
+--     id serial primary key,
+--     fk_educator int,
+--     title varchar(255),
+--     description text,
+--     imageUrl varchar(255),
+--     price float,
+--     created_at timestamp default current_timestamp,
+--     updated_at timestamp default current_timestamp
+-- );
 
 create table chapters(
     chapter_id serial primary key,

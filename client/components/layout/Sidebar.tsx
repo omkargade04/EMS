@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-undef */
@@ -15,6 +16,8 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/context/Auth";
+import Logo from "../../public/images/grad-hat-removebg-preview.png";
+import Image from "next/image";
 
 // components
 
@@ -75,7 +78,12 @@ const Sidebar = () => {
             <div className="flex flex-col sm:flex justify-center items-center gap-4">
               <div className="">{name}</div>
               <div className="text-pink-500 font-semibold ">{role}</div>
-              <Button onClick={handleLogOut} className="bg-[#2a4185] hover:bg-[#2a4185]/90">Logout</Button>
+              <Button
+                onClick={handleLogOut}
+                className="bg-[#2a4185] hover:bg-[#2a4185]/90"
+              >
+                Logout
+              </Button>
             </div>
           ) : (
             <Link
@@ -86,10 +94,18 @@ const Sidebar = () => {
             </Link>
           )}
         </div>
-        <div className="flex flex-col justify-center space-y-8 text-xl font-semibold  items-center pt-10">
+        <div className="flex flex-col justify-center space-y-2 text-xl font-semibold  items-center pt-10">
           <Link className="flex" href="#">
-            <FlagIcon className="h-6 w-6" />
-            <span className="text-[#2a4185]">Logo</span>
+            <div className="flex ">
+              <Image
+                alt="logo"
+                height={100}
+                src={Logo}
+                width={100}
+                className="hidden sm:block"
+              />
+              <p className="py-10">EduSphere</p>
+            </div>
           </Link>
           <div className="flex flex-col space-y-2">
             <Link

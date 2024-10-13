@@ -34,7 +34,7 @@ export default function Home() {
         <div className="sm:absolute inset-0 bg-[rgba(255,255,255,0.75)] backdrop-blur flex items-center justify-center p-4">
           <div className="grid gap-4 text-center">
             <h1 className="text-2xl font-bold text-[#2a4185] transform hover:scale-110 transition-transform duration-300 tracking-tighter sm:text-5xl ">
-              WELCOME TO ACADEMIA
+              WELCOME TO EDUSPHERE
             </h1>
             <p className="mx-auto max-w-2xl text-gray-500 md:text-md/relaxed dark:text-gray-400">
               Introduce your child to the world of programming with our fun and
